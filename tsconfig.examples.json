@@ -1,0 +1,5 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": { "noEmit": true, "types": [] },
+  "files": ["examples/expo/App.tsx", "examples/nextjs/page.tsx", "examples/nextjs/tailwind.config.ts", "showcase/App.tsx"]
+}

@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Lumen — base layer
+   A light-touch reset + document defaults. Everything is scoped to low
+   specificity (:where) so your own styles always win.
+   ========================================================================== */
+
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html) {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(body) {
+  margin: 0;
+  font-family: var(--lm-font-sans);
+  font-size: var(--lm-text-body-size);
+  line-height: var(--lm-text-body-line);
+  letter-spacing: var(--lm-text-body-tracking);
+  color: var(--lm-color-label-primary);
+  background: var(--lm-color-background-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: 'kern', 'liga', 'calt';
+}
+
+:where(h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
+  margin: 0;
+}
+
+:where(img, svg, video, canvas) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(button, input, select, textarea) {
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+:where(a) {
+  color: var(--lm-color-accent);
+  text-decoration: none;
+}
+
+:where(a:hover) {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+::selection {
+  background: var(--lm-color-accent-subtle);
+}
+
+:where(:focus-visible) {
+  outline: 3px solid var(--lm-color-focus);
+  outline-offset: 2px;
+}
+
+/* Grouped canvas: use on <body> or a page wrapper for Settings-style screens */
+.lm-canvas-grouped {
+  background: var(--lm-color-background-grouped);
+}
+
+.lm-visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(*, *::before, *::after) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
