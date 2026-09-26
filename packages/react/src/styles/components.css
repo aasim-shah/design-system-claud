@@ -1059,7 +1059,7 @@
 
 .lm-navbar {
   position: sticky;
-  top: 0;
+  top: env(safe-area-inset-top, 0px);
   z-index: var(--lm-z-sticky);
   display: flex;
   flex-direction: column;
