@@ -31,6 +31,7 @@ export function ThemeProvider({
   onSchemeChange,
   accent,
   colors,
+  brand,
 }: ThemeProviderProps) {
   const system = useColorScheme();
   const [inner, setInner] = useState<ColorSchemePreference>(defaultScheme);
@@ -39,7 +40,7 @@ export function ThemeProvider({
 
   const value = useMemo<LumenTheme>(
     () => ({
-      ...createTheme(resolved, { accent, colors }),
+      ...createTheme(resolved, { accent, colors, brand }),
       preference,
       setPreference: (p) => {
         if (controlled === undefined) setInner(p);
@@ -47,7 +48,7 @@ export function ThemeProvider({
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [resolved, preference, controlled, onSchemeChange, JSON.stringify(accent), JSON.stringify(colors)],
+    [resolved, preference, controlled, onSchemeChange, brand, JSON.stringify(accent), JSON.stringify(colors)],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

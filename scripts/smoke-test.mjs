@@ -48,6 +48,24 @@ test('brand accent derivation', () => {
   assert.equal(T.intentFrom('#FFD60A', 'dark').on, '#000000');
 });
 
+for (const b of T.brandNames) {
+  test(`brand ${b}: AA in light, readable label in dark`, () => {
+    const l = T.brandAccent(b, 'light');
+    const d = T.brandAccent(b, 'dark');
+    assert.ok(T.contrastRatio(l.default, '#FFFFFF') >= 4.5, `light text ${T.contrastRatio(l.default, '#FFFFFF').toFixed(2)}`);
+    assert.ok(T.contrastRatio(l.on, l.default) >= 4.5, 'light label on fill');
+    assert.ok(T.contrastRatio(d.on, d.default) >= 3.4, `dark label ${T.contrastRatio(d.on, d.default).toFixed(2)}`);
+  });
+}
+
+test('brand flows through createTheme, CSS and scoped rules', () => {
+  assert.equal(T.createTheme('light', { brand: 'orange' }).colors.accent.default, '#C95100');
+  assert.equal(T.createTheme('light', { brand: 'orange', accent: '#123456' }).colors.accent.default, '#123456');
+  const scoped = T.createBrandsCss();
+  assert.ok(scoped.includes('[data-brand="orange"] {'));
+  assert.ok(scoped.includes('[data-theme="dark"] [data-brand="orange"]'));
+});
+
 test('css output contains light, dark & media blocks', () => {
   const css = T.createThemeCss({ accent: '#FF2D55' });
   assert.ok(css.includes('--lm-color-accent: #FF2D55'));
@@ -154,6 +172,7 @@ test('SSR markup details', () => {
   assert.match(renderToString(cases.Avatar), />JA</);
   assert.match(renderToString(cases.Segmented), /--lm-seg-index:1/);
   assert.match(renderToString(cases.Providers), /--lm-color-accent: #FF2D55/);
+  assert.match(renderToString(h(UI.ThemeProvider, { brand: 'green' }, 'x')), /--lm-color-accent: #15803D/);
 });
 
 console.log(process.exitCode ? `\n${passed} passed, some failed` : `✓ ${passed} checks passed`);

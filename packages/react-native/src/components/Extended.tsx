@@ -293,7 +293,7 @@ export function Steps({ steps, current, style }: { steps: string[]; current: num
                   left: '-50%',
                   marginHorizontal: 20,
                   height: 1.5,
-                  backgroundColor: i <= current ? colors.label.primary : colors.separator.default,
+                  backgroundColor: i <= current ? colors.accent.default : colors.separator.default,
                 }}
               />
             )}
@@ -306,13 +306,13 @@ export function Steps({ steps, current, style }: { steps: string[]; current: num
                 justifyContent: 'center',
                 backgroundColor: state === 'complete' ? colors.accent.default : 'transparent',
                 borderWidth: state === 'complete' ? 0 : 1.5,
-                borderColor: state === 'current' ? colors.label.primary : colors.separator.default,
+                borderColor: state === 'current' ? colors.accent.default : colors.separator.default,
               }}
             >
               {state === 'complete' ? (
                 <Glyph name="check" size={13} weight={2} color={colors.accent.on} />
               ) : (
-                <Text variant="footnote" weight="semibold" color={state === 'current' ? 'primary' : 'tertiary'}>{i + 1}</Text>
+                <Text variant="footnote" weight="semibold" color={state === 'current' ? 'accent' : 'tertiary'}>{i + 1}</Text>
               )}
             </View>
             <Text variant="footnote" weight="medium" color={state === 'current' ? 'primary' : 'secondary'} numberOfLines={1}>
@@ -531,7 +531,7 @@ export function TabBar({ items, value, onValueChange, bottomInset = Platform.OS 
     >
       {items.map((t) => {
         const on = t.value === value;
-        const c = on ? colors.label.primary : colors.label.tertiary;
+        const c = on ? colors.accent.default : colors.label.tertiary;
         return (
           <Pressable
             key={t.value}
@@ -628,7 +628,7 @@ export function Tabs({ items, value, defaultValue, onValueChange, scrollable, st
             );
           })}
         </View>
-        <Animated.View style={{ position: 'absolute', bottom: 0, left: x, width: w, height: 2, borderRadius: 1, backgroundColor: colors.label.primary }} />
+        <Animated.View style={{ position: 'absolute', bottom: 0, left: x, width: w, height: 2, borderRadius: 1, backgroundColor: colors.accent.default }} />
       </Row>
     </View>
   );

@@ -128,6 +128,8 @@ export interface SemanticColors {
   inverse: string;
   /** Raised thumb of segmented controls. */
   thumb: string;
+  /** Knob of a switch sitting on the accent-colored track. */
+  accentThumb: string;
 }
 
 const light: SemanticColors = {
@@ -197,6 +199,7 @@ const light: SemanticColors = {
   focus: 'rgba(0, 0, 0, 0.22)',
   inverse: '#1C1C1E',
   thumb: '#FFFFFF',
+  accentThumb: '#FFFFFF',
 };
 
 const dark: SemanticColors = {
@@ -265,6 +268,7 @@ const dark: SemanticColors = {
   focus: 'rgba(255, 255, 255, 0.32)',
   inverse: '#F2F2F7',
   thumb: '#636366',
+  accentThumb: '#000000',
 };
 
 export const semantic: Record<ColorScheme, SemanticColors> = { light, dark };

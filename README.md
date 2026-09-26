@@ -112,6 +112,35 @@ Full examples: [`examples/nextjs`](examples/nextjs) · [`examples/expo`](example
 | --- | --- |
 | Automatic via `prefers-color-scheme`. Force it with `data-theme="dark" \| "light"` or a `.dark` / `.light` class on any ancestor (works with `next-themes`). `useTheme().setPreference('dark' \| 'light' \| 'system')` persists the choice. | Automatic via `useColorScheme()`. `useTheme().setPreference(...)`, or control it with `<ThemeProvider scheme={...}>`. |
 
+### Brand presets: one color per product
+
+Lumen stays monochrome by default (`graphite`). For each app, pick a preset and only the accent family changes: buttons, switches, checkboxes, chips, tabs, tab bar, steps, progress, links and focus rings. Neutrals, type and shapes stay the same, so all your products still feel related.
+
+| Preset | Light (on white) | Dark | Label on dark fill |
+| --- | --- | --- | --- |
+| `graphite` | `#111111` | `#F5F5F7` | black |
+| `orange` | `#C95100` · 4.5:1 | `#FF9F0A` | black |
+| `blue` | `#0071E3` · 4.7:1 | `#0A84FF` | white |
+| `indigo` | `#5856D6` · 5.6:1 | `#7D7AFF` | white |
+| `green` | `#15803D` · 5.0:1 | `#30D158` | black |
+| `teal` | `#0E7C86` · 4.9:1 | `#40C8E0` | black |
+| `pink` | `#E11D48` · 4.7:1 | `#FF375F` | white |
+| `red` | `#DC2626` · 4.8:1 | `#FF453A` | white |
+| `purple` | `#9333EA` · 5.4:1 | `#BF5AF2` | white |
+
+All light shades pass WCAG AA (4.5:1) for text on white and for white labels on filled buttons. The tests enforce this.
+
+```tsx
+// Next.js: the whole app, with no JavaScript and no flash (brand rules ship in styles.css)
+<html lang="en" data-brand="orange">
+
+// Or on any element: one page can show several brands
+<section data-brand="green">…</section>
+
+// With the provider (web or React Native)
+<ThemeProvider brand="orange">
+```
+
 ### Brand accent in one line (optional)
 
 Out of the box the accent is monochrome. If a product needs a brand color, opt in:

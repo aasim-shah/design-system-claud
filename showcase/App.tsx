@@ -54,6 +54,8 @@ import { Section, Demo } from './layout';
 import { DataSection, FormsSection, NavigationSection, OverlaysSection } from './Sections';
 import { SpecsSection } from './Specs';
 import { IconsSection } from './Icons';
+import { BrandPicker, BrandsSection } from './Brands';
+import { brandAccent, brandLabel, type BrandName } from '@lumen/tokens';
 
 /* Small inline glyphs for the demo (any 24px stroke icon set works) */
 const Wifi = WifiIcon;
@@ -81,7 +83,7 @@ function Swatch({ name, token, light, dark }: { name: string; token: string; lig
   );
 }
 
-function Header() {
+function Header({ brand, setBrand }: { brand: BrandName; setBrand: (b: BrandName) => void }) {
   const { preference, setPreference } = useTheme();
   return (
     <NavigationBar
@@ -96,7 +98,8 @@ function Header() {
         </HStack>
       }
       trailing={
-        <HStack gap={3}>
+        <HStack gap={4}>
+          <BrandPicker value={brand} onChange={setBrand} />
           <SegmentedControl<ColorSchemePreference>
             label="Appearance"
             value={preference}
@@ -142,7 +145,7 @@ function Hero() {
   );
 }
 
-function Foundations() {
+function Foundations({ brand }: { brand: BrandName }) {
   const semanticGroups: { title: string; items: [string, string, keyof typeof semantic.light, string?][] }[] = [
     {
       title: 'Accent & status',
@@ -201,6 +204,8 @@ function Foundations() {
                   const v = semantic[s][group] as unknown as Record<string, string>;
                   return v[key ?? 'default'];
                 };
+                if (group === 'accent')
+                  return <Swatch key={token} name={`Accent · ${brandLabel(brand)}`} token={token} light={brandAccent(brand, 'light').default} dark={brandAccent(brand, 'dark').default} />;
                 return <Swatch key={token} name={name} token={token} light={pick('light')} dark={pick('dark')} />;
               })}
             </div>
@@ -741,13 +746,15 @@ function Components() {
 }
 
 export function App() {
+  const [brand, setBrand] = useState<BrandName>('orange');
   return (
-    <ThemeProvider storageKey="lumen-showcase-scheme">
+    <ThemeProvider storageKey="lumen-showcase-scheme" brand={brand}>
       <ToastProvider>
-        <Header />
+        <Header brand={brand} setBrand={setBrand} />
         <main className="sc-main">
           <Hero />
-          <Foundations />
+          <Foundations brand={brand} />
+          <BrandsSection brand={brand} setBrand={setBrand} />
           <IconsSection />
           <SpecsSection />
           <Components />

@@ -52,6 +52,7 @@ export function ThemeProvider({
   storageKey = 'lumen-scheme',
   accent,
   colors,
+  brand,
 }: ThemeProviderProps) {
   const [inner, setInner] = useState<ColorSchemePreference>(defaultScheme);
   const [system, setSystem] = useState<ColorScheme>('light');
@@ -88,9 +89,12 @@ export function ThemeProvider({
   }, [preference]);
 
   const css = useMemo(
-    () => (accent || colors ? createThemeCss({ accent, colors }, { includeStatic: false }) : null),
+    () =>
+      accent || colors || (brand && brand !== 'graphite')
+        ? createThemeCss({ accent, colors, brand }, { includeStatic: false })
+        : null,
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [JSON.stringify(accent), JSON.stringify(colors)],
+    [JSON.stringify(accent), JSON.stringify(colors), brand],
   );
 
   const value = useMemo<ThemeContextValue>(

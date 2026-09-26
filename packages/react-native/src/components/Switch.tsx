@@ -90,7 +90,7 @@ export function Switch({
             borderRadius: thumb / 2,
             backgroundColor:
               tone === 'accent'
-                ? progress.interpolate({ inputRange: [0, 1], outputRange: ['#FFFFFF', colors.accent.on] })
+                ? progress.interpolate({ inputRange: [0, 1], outputRange: ['#FFFFFF', colors.accentThumb] })
                 : '#FFFFFF',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 3 },

@@ -107,3 +107,17 @@
 .sc-icon:hover { background: var(--lm-color-fill-tertiary); }
 .sc-icon:active { transform: scale(0.96); }
 .sc-icon:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--lm-color-focus); }
+
+/* ---- Brands ---- */
+.sc-brands { padding-right: var(--lm-space-1); }
+.sc-brand-dot {
+  width: 18px; height: 18px; padding: 0; border: 0; border-radius: 99px; cursor: pointer;
+  transition: transform var(--lm-duration-fast) var(--lm-ease-standard), box-shadow var(--lm-duration-fast);
+}
+.sc-brand-dot[aria-checked='true'] { box-shadow: 0 0 0 2px var(--lm-color-background-primary), 0 0 0 3.5px var(--lm-color-label-primary); }
+.sc-brand-dot:active { transform: scale(0.88); }
+.sc-brand-dot:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--lm-color-background-primary), 0 0 0 5px var(--lm-color-focus); }
+@media (max-width: 720px) { .sc-brands { display: none !important; } }
+.sc-brand-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--lm-space-4); }
+.sc-brand-card[data-active] .lm-card { box-shadow: inset 0 0 0 2px var(--lm-color-accent); }
+.sc-code { margin: 0; padding: var(--lm-space-4); overflow-x: auto; border-radius: var(--lm-radius-lg); background: var(--lm-color-background-primary); box-shadow: inset 0 0 0 0.5px var(--lm-color-separator); font: 13px/1.6 var(--lm-font-mono); color: var(--lm-color-label-primary); }

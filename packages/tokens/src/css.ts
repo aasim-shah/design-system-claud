@@ -9,6 +9,7 @@ import { spacing, radius, size, zIndex, opacity } from './layout.js';
 import { cssShadow, type ElevationLevel } from './elevation.js';
 import { duration, easing, cssEasing, type EasingKey } from './motion.js';
 import { resolveColors, type ThemeOverrides } from './theme.js';
+import { brandAccent, brandFocus, brandNames, brandThumb, type BrandName } from './brands.js';
 
 export const PREFIX = 'lm';
 
@@ -87,3 +88,37 @@ export function createThemeCss(overrides: ThemeOverrides = {}, options: { includ
 /** `cssVar('color-accent')` → `var(--lm-color-accent)` */
 export const cssVar = (name: string, fallback?: string) =>
   `var(--${PREFIX}-${name}${fallback ? `, ${fallback}` : ''})`;
+
+function accentVars(name: BrandName, scheme: ColorScheme): Record<string, string> {
+  const a = brandAccent(name, scheme);
+  return {
+    [`--${PREFIX}-color-accent`]: a.default,
+    [`--${PREFIX}-color-accent-pressed`]: a.pressed,
+    [`--${PREFIX}-color-accent-subtle`]: a.subtle,
+    [`--${PREFIX}-color-accent-on`]: a.on,
+    [`--${PREFIX}-color-focus`]: brandFocus(name, scheme),
+    [`--${PREFIX}-color-accent-thumb`]: brandThumb(name, scheme),
+  };
+}
+
+/**
+ * Scoped brand rules: put `data-brand="orange"` on <html> (whole app) or on
+ * any element (one section). Light/dark follow the same rules as tokens.css.
+ */
+export function createBrandsCss(): string {
+  const out: string[] = [];
+  const dark: string[] = [];
+  const media: string[] = [];
+  for (const name of brandNames) {
+    const b = `[data-brand="${name}"]`;
+    out.push(block(b, accentVars(name, 'light')));
+    dark.push(block(`[data-theme="dark"] ${b},\n[data-theme="dark"]${b},\n.dark ${b},\n.dark${b}`, accentVars(name, 'dark')));
+    media.push(
+      block(`:root:not([data-theme="light"]):not(.light) ${b},\n:root:not([data-theme="light"]):not(.light)${b}`, accentVars(name, 'dark'))
+        .split('\n')
+        .map((l) => '  ' + l)
+        .join('\n'),
+    );
+  }
+  return [...out, ...dark, `@media (prefers-color-scheme: dark) {\n${media.join('\n\n')}\n}`].join('\n\n') + '\n';
+}

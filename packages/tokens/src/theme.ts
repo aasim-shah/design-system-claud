@@ -1,5 +1,6 @@
 import { semantic, palette, type ColorScheme, type SemanticColors, type IntentColor } from './colors.js';
-import { intentFrom, withAlpha } from './color-utils.js';
+import { contrastRatio, intentFrom, withAlpha } from './color-utils.js';
+import { brandAccent, brandFocus, brandThumb, type BrandName } from './brands.js';
 import { typography } from './typography.js';
 import { spacing, radius, size, breakpoints, zIndex, opacity } from './layout.js';
 import { elevation } from './elevation.js';
@@ -8,6 +9,8 @@ import { motion } from './motion.js';
 type DeepPartial<T> = { [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K] };
 
 export interface ThemeOverrides {
+  /** Named brand preset (orange, blue, green…). `accent` wins if both are set. */
+  brand?: BrandName;
   /**
    * Brand accent. One hex for both schemes, or a pair.
    * Pressed / subtle / on colors are derived automatically.
@@ -53,8 +56,16 @@ export function resolveAccent(
 
 export function resolveColors(scheme: ColorScheme, overrides: ThemeOverrides = {}): SemanticColors {
   let colors = semantic[scheme];
+  if (overrides.brand && overrides.brand !== 'graphite')
+    colors = { ...colors, accent: brandAccent(overrides.brand, scheme), focus: brandFocus(overrides.brand, scheme), accentThumb: brandThumb(overrides.brand, scheme) };
   const accent = resolveAccent(overrides.accent, scheme);
-  if (accent) colors = { ...colors, accent, focus: withAlpha(accent.default, scheme === 'dark' ? 0.6 : 0.45) };
+  if (accent)
+    colors = {
+      ...colors,
+      accent,
+      focus: withAlpha(accent.default, scheme === 'dark' ? 0.6 : 0.45),
+      accentThumb: contrastRatio(accent.default, '#FFFFFF') >= 1.6 ? '#FFFFFF' : '#000000',
+    };
   return merge(colors, overrides.colors?.[scheme]);
 }
 
