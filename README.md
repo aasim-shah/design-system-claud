@@ -11,9 +11,42 @@ packages/
 ├── tokens/         @lumen/tokens        Colors, type, spacing, radius, elevation, motion → TS, CSS vars, JSON, Tailwind
 ├── react/          @lumen/react         Web components (Next.js App Router ready, SSR safe, zero runtime CSS-in-JS)
 └── react-native/   @lumen/react-native  Native components (no native deps: no SVG, no Reanimated, no safe-area lib)
+plugins/lumen/      Claude Code plugin: /lumen:setup and /lumen:design-system skills
 showcase/           Interactive, single-file docs site built from the real components
 examples/           Copy-paste starters for Next.js and Expo
 ```
+
+## Use it in your projects
+
+### With Claude Code (recommended)
+
+This repo is a Claude Code plugin marketplace. Add it once, and every project on your machine gets two skills.
+
+```bash
+claude plugin marketplace add aasim-shah/design-system-claud
+claude plugin install lumen@lumen
+```
+
+Or run `/plugin marketplace add aasim-shah/design-system-claud` inside a session, then `/plugin install lumen@lumen`.
+
+| Skill | What it does | Try |
+| --- | --- | --- |
+| `/lumen:setup` | Builds Lumen from this repo and installs it into the current app as pinned tarballs (`vendor/lumen/`). It works with npm, pnpm, yarn and bun, then wires the stylesheet, providers and brand into Next.js, Vite or Expo. | "Add our design system to this app, orange brand" |
+| `/lumen:design-system` | Loads automatically whenever you build UI in a Lumen project. It picks the right components, keeps to the tokens, spacing, radius, rounded icons and one primary action, and covers empty, loading and error states. | "Build a settings page with notification toggles and sign out" |
+
+- Run `/plugin marketplace update lumen` to get skill updates.
+- Ask Claude to "update Lumen" in a project to reinstall the latest build.
+
+### Without Claude Code
+
+The installer the skill uses is a plain Node script:
+
+```bash
+git clone https://github.com/aasim-shah/design-system-claud.git
+node design-system-claud/plugins/lumen/skills/setup/scripts/install.mjs --target ./my-app --brand orange
+```
+
+It detects the platform and package manager. It builds and packs `@lumen/tokens`, `@lumen/icons` and `@lumen/react` (or `@lumen/react-native`) into `my-app/vendor/lumen/`, installs them, and prints the snippet to add to your layout. Commit `vendor/lumen/*.tgz` so teammates and CI get the same build. To publish to npm instead, see [Publishing](#publishing).
 
 ---
 
@@ -32,7 +65,7 @@ examples/           Copy-paste starters for Next.js and Expo
 ## Quick start
 
 > The packages build to `packages/*/dist`. Publish them to npm or GitHub Packages under your own scope
-> (see [Using it in your apps](#using-it-in-your-apps)), then install them in your apps.
+> (see [Use it in your projects](#use-it-in-your-projects)), then install them in your apps.
 
 ### Next.js (App Router)
 
@@ -301,7 +334,10 @@ It will match the system. On iOS, `expo-symbols` gives you real SF Symbols.
 
 ---
 
-## Using it in your apps
+## Publishing
+
+If you'd rather install from a registry than use the installer:
+
 
 1. **Rename the scope** (optional). `@lumen` is a placeholder. To use your own npm scope:
    ```bash
@@ -321,9 +357,9 @@ It will match the system. On iOS, `expo-symbols` gives you real SF Symbols.
 npm install
 npm run build        # tokens → react → react-native
 npm run typecheck    # all packages + examples
-npm test             # token contrast checks + SSR render of every web component
+npm test             # contrast checks, SSR render of every web component, skill recipes typecheck
 npm run showcase     # → showcase/dist/index.html (single self-contained file, open it in a browser)
-npm run docs         # regenerate docs/SPECS.md from packages/tokens/src/specs.ts
+npm run docs         # regenerate docs/SPECS.md and the skill's references from the source
 ```
 
 Tokens are the source of truth. Edit `packages/tokens/src/*`, and CSS variables, JSON, Tailwind and both component

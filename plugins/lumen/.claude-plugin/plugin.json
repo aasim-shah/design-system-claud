@@ -1,0 +1,11 @@
+{
+  "name": "lumen",
+  "version": "0.1.0",
+  "description": "Install and use the Lumen design system (tokens, React/Next.js and React Native components, Lumen Rounded icons, brand presets).",
+  "author": {
+    "name": "Aasim Shah"
+  },
+  "repository": "https://github.com/aasim-shah/design-system-claud",
+  "license": "MIT",
+  "keywords": ["design-system", "react", "nextjs", "react-native", "ui", "tokens"]
+}

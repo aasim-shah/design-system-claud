@@ -12,9 +12,9 @@
   "scripts": {
     "build": "npm run build -w @lumen/tokens && npm run build -w @lumen/icons && npm run build -w @lumen/react && npm run build -w @lumen/react-native",
     "typecheck": "npm run build && npm run typecheck --workspaces --if-present && tsc -p tsconfig.examples.json",
-    "test": "npm run build && node scripts/smoke-test.mjs",
+    "test": "npm run build && node scripts/smoke-test.mjs && node scripts/check-skill-snippets.mjs",
     "showcase": "npm run build && node scripts/build-showcase.mjs",
-    "docs": "npm run build -w @lumen/tokens && node scripts/build-specs-md.mjs"
+    "docs": "npm run build -w @lumen/tokens && npm run build -w @lumen/icons && node scripts/build-specs-md.mjs && node scripts/build-skill-refs.mjs"
   },
   "devDependencies": {
     "@types/react": "^19.1.1",

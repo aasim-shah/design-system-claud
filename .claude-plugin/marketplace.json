@@ -1,0 +1,14 @@
+{
+  "name": "lumen",
+  "description": "Lumen design system for Claude Code: set it up in any Next.js, React or React Native project and build calm, minimal, iOS-like UI with it.",
+  "owner": {
+    "name": "Aasim Shah"
+  },
+  "plugins": [
+    {
+      "name": "lumen",
+      "source": "./plugins/lumen",
+      "description": "Skills to install the Lumen design system in a project (/lumen:setup) and to build every screen with its components, tokens, rounded icons and brand colors (/lumen:design-system)."
+    }
+  ]
+}
