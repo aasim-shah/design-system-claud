@@ -62,7 +62,7 @@
   outline-offset: 2px;
 }
 
-/* Grouped canvas: use on <body> or a page wrapper for Settings-style screens */
+/* Grouped canvas: use on the body element or a page wrapper for Settings-style screens */
 .lm-canvas-grouped {
   background: var(--lm-color-background-grouped);
 }
