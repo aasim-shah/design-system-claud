@@ -34,7 +34,7 @@ Overlays · Data · Icons · Theme
 <Button variant="gray">Cancel</Button>
 <Button variant="tinted" leadingIcon={<PlusIcon />}>Add</Button>
 <Button tone="danger">Delete</Button>
-<Button href="/pricing" variant="plain">See pricing</Button>   // renders <a>
+<Button href="/pricing" variant="plain">See pricing</Button>   // renders <a>; `disabled` drops the href and sets aria-disabled
 <Button size="lg" fullWidth shape="capsule">Get started</Button>
 <IconButton label="Share" icon={<ShareIcon />} />              // variant gray by default; label required
 ```

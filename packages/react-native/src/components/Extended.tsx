@@ -17,6 +17,7 @@ import { motion } from '@lumen/tokens';
 import { useTheme } from '../theme/ThemeProvider.js';
 import { Badge } from './Display.js';
 import { Glyph } from './Glyph.js';
+import { IconCircle } from './IconCircle.js';
 import { usePresence } from './Overlay.js';
 import { Text } from './Text.js';
 import { TextField, type TextFieldProps } from './TextField.js';
@@ -102,6 +103,12 @@ export function Accordion({ items, type = 'single', defaultValue = [], style }: 
 
 export interface AlertProps {
   tone?: 'neutral' | 'success' | 'warning' | 'danger';
+  /**
+   * Icon shown in a tinted circle, like the web Alert, e.g.
+   * `(c, s) => <AlertIcon color={c} size={s} />` from @lumen/icons/native.
+   * Without it, a small status dot is shown.
+   */
+  icon?: (color: string, size: number) => ReactNode;
   title?: string;
   children?: ReactNode;
   actions?: ReactNode;
@@ -109,8 +116,8 @@ export interface AlertProps {
   style?: StyleProp<ViewStyle>;
 }
 
-/** Inline banner. Only the status dot carries color. */
-export function Alert({ tone = 'neutral', title, children, actions, onDismiss, style }: AlertProps) {
+/** Inline banner. Only the icon (or status dot) carries color. */
+export function Alert({ tone = 'neutral', icon, title, children, actions, onDismiss, style }: AlertProps) {
   const { colors, radius } = useTheme();
   const dot = tone === 'neutral' ? colors.label.secondary : colors[tone].default;
   return (
@@ -121,7 +128,8 @@ export function Alert({ tone = 'neutral', title, children, actions, onDismiss, s
           flexDirection: 'row',
           gap: 12,
           padding: 16,
-          borderRadius: radius.lg,
+          paddingRight: 20,
+          borderRadius: radius.xl,
           backgroundColor: colors.fill.quaternary,
           borderWidth: StyleSheet.hairlineWidth,
           borderColor: colors.separator.default,
@@ -129,7 +137,11 @@ export function Alert({ tone = 'neutral', title, children, actions, onDismiss, s
         style,
       ]}
     >
-      <View style={{ width: 8, height: 8, borderRadius: 4, marginTop: 6, backgroundColor: dot }} />
+      {icon ? (
+        <IconCircle variant="tinted" color={dot} icon={icon} style={{ marginVertical: -6 }} />
+      ) : (
+        <View style={{ width: 8, height: 8, borderRadius: 4, marginTop: 6, backgroundColor: dot }} />
+      )}
       <View style={{ flex: 1, gap: 2 }}>
         {title && <Text variant="subheadline" weight="semibold">{title}</Text>}
         {typeof children === 'string' ? <Text variant="subheadline" color="secondary">{children}</Text> : children}

@@ -34,7 +34,7 @@ interface BaseProps {
 export type ButtonProps = BaseProps &
   (
     | ({ href?: undefined } & ButtonHTMLAttributes<HTMLButtonElement>)
-    | ({ href: string } & AnchorHTMLAttributes<HTMLAnchorElement>)
+    | ({ href: string; /** Renders a non-interactive link (no href, aria-disabled). */ disabled?: boolean } & AnchorHTMLAttributes<HTMLAnchorElement>)
   );
 
 /**
@@ -81,9 +81,20 @@ export const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPr
   );
 
   if (typeof rest.href === 'string') {
-    const anchor = rest as AnchorHTMLAttributes<HTMLAnchorElement>;
+    // Links can't be disabled natively: drop the href so it can't be followed
+    // or focused, and expose the state to assistive tech.
+    const { disabled, href, onClick: onAnchorClick, ...anchor } = rest as AnchorHTMLAttributes<HTMLAnchorElement> & { disabled?: boolean };
+    const inert = disabled || loading;
     return (
-      <a ref={ref as Ref<HTMLAnchorElement>} {...common} {...anchor}>
+      <a
+        ref={ref as Ref<HTMLAnchorElement>}
+        {...common}
+        {...anchor}
+        href={inert ? undefined : href}
+        aria-disabled={inert || undefined}
+        tabIndex={inert ? -1 : anchor.tabIndex}
+        onClick={inert ? (e) => e.preventDefault() : onAnchorClick}
+      >
         {content}
       </a>
     );

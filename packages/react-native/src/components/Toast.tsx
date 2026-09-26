@@ -84,11 +84,11 @@ export function ToastProvider({ children, topInset }: ToastProviderProps) {
     toast?.icon ??
     (tone === 'success' ? (
       <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: toneColor.success, alignItems: 'center', justifyContent: 'center' }}>
-        <Glyph name="check" size={11} weight={2} color="#FFFFFF" />
+        <Glyph name="check" size={12} weight={2} color={theme.palette.white} />
       </View>
     ) : tone === 'danger' ? (
       <View style={{ width: 20, height: 20, borderRadius: 10, backgroundColor: toneColor.danger, alignItems: 'center', justifyContent: 'center' }}>
-        <Glyph name="close" size={9} weight={2} color="#FFFFFF" />
+        <Glyph name="close" size={11} weight={2} color={theme.palette.white} />
       </View>
     ) : null);
 

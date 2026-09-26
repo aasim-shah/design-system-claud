@@ -164,6 +164,13 @@ test('every icon is categorised exactly once and exported as a component', () =>
   }
 });
 
+test('disabled link-button has no href and is aria-disabled', () => {
+  const html = renderToString(h(UI.Button, { href: '/checkout', disabled: true }, 'Checkout'));
+  assert.doesNotMatch(html, /href=/);
+  assert.match(html, /aria-disabled="true"/);
+  assert.match(renderToString(h(UI.Button, { href: '/x' }, 'Go')), /href="\/x"/);
+});
+
 test('SSR markup details', () => {
   assert.match(renderToString(cases.Breadcrumbs), /aria-current="page"/);
   assert.match(renderToString(cases.Breadcrumbs), /…/);

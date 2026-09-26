@@ -56,7 +56,7 @@ Screens with grouped content use `backgroundColor: theme.colors.background.group
 </ListSection>
 
 <Card onPress={open}>…</Card>   <Badge tone="success" dot>Paid</Badge>   <Avatar name="Jane Appleseed" source={{ uri }} />
-<Alert tone="warning" title="Storage almost full">You've used 92%.</Alert>
+<Alert tone="warning" title="Storage almost full" icon={(c, s) => <AlertIcon color={c} size={s} />}>You've used 92%.</Alert>
 <EmptyState icon={<FolderIcon size={26} color={theme.colors.label.secondary} />} title="No projects" actions={<Button>New</Button>} />
 <IconCircle variant="tinted" color={theme.colors.success.default} icon={(c, s) => <CheckIcon color={c} size={s} />} />
 <Progress value={64} />   <Spinner />   <Skeleton shape="text" width="60%" />   <Divider />

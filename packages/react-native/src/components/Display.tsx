@@ -89,7 +89,7 @@ export function initials(name = ''): string {
 }
 
 export function Avatar({ source, name, size = 'md', shape = 'circle', color, status, style }: AvatarProps) {
-  const { colors } = useTheme();
+  const { colors, palette } = useTheme();
   const [failed, setFailed] = useState(false);
   const px = typeof size === 'number' ? size : sizes.avatar[size];
   const r = shape === 'rounded' ? px * 0.225 : px / 2;
@@ -102,7 +102,7 @@ export function Avatar({ source, name, size = 'md', shape = 'circle', color, sta
           height: px,
           borderRadius: r,
           overflow: 'hidden',
-          backgroundColor: color ?? '#9A9FAA',
+          backgroundColor: color ?? palette.gray,
           alignItems: 'center',
           justifyContent: 'center',
         }}
@@ -110,7 +110,7 @@ export function Avatar({ source, name, size = 'md', shape = 'circle', color, sta
         {source && !failed ? (
           <Image source={source} style={{ width: px, height: px }} onError={() => setFailed(true)} />
         ) : (
-          <Text style={{ color: '#FFFFFF', fontSize: px * 0.4, lineHeight: px * 0.5, fontWeight: '600' }}>{initials(name)}</Text>
+          <Text style={{ color: palette.white, fontSize: px * 0.4, lineHeight: px * 0.5, fontWeight: '600' }}>{initials(name)}</Text>
         )}
       </View>
       {status && (

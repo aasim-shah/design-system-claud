@@ -116,7 +116,7 @@ export interface ListIconProps {
 /** The small rounded, colored icon tile used at the start of list rows. */
 export function ListIcon({ children, color }: ListIconProps) {
   return (
-    <span className="lm-list-item__icon" style={color ? ({ '--lm-list-icon-bg': color, '--lm-list-icon-fg': '#fff' } as CSSProperties) : undefined}>
+    <span className="lm-list-item__icon" style={color ? ({ '--lm-list-icon-bg': color, '--lm-list-icon-fg': 'var(--lm-white)' } as CSSProperties) : undefined}>
       {children}
     </span>
   );

@@ -27,7 +27,7 @@ export function SegmentedControl<T extends string = string>({
   size = 'md',
   style,
 }: SegmentedControlProps<T>) {
-  const { colors, scheme } = useTheme();
+  const { colors, palette, scheme } = useTheme();
   const [inner, setInner] = useState<T | undefined>(defaultValue ?? options[0]?.value);
   const current = value ?? inner;
   const index = Math.max(0, options.findIndex((o) => o.value === current));
@@ -61,7 +61,7 @@ export function SegmentedControl<T extends string = string>({
             borderRadius: size === 'lg' ? 9 : 7,
             backgroundColor: colors.thumb,
             transform: [{ translateX: x }],
-            shadowColor: '#000',
+            shadowColor: palette.black,
             shadowOffset: { width: 0, height: 3 },
             shadowOpacity: scheme === 'dark' ? 0 : 0.12,
             shadowRadius: 4,

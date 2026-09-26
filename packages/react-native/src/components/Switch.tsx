@@ -26,7 +26,7 @@ export function Switch({
   accessibilityLabel,
   style,
 }: SwitchProps) {
-  const { colors, opacity } = useTheme();
+  const { colors, palette, opacity } = useTheme();
   const [inner, setInner] = useState(defaultValue);
   const on = value ?? inner;
   const progress = useRef(new Animated.Value(on ? 1 : 0)).current;
@@ -90,9 +90,9 @@ export function Switch({
             borderRadius: thumb / 2,
             backgroundColor:
               tone === 'accent'
-                ? progress.interpolate({ inputRange: [0, 1], outputRange: ['#FFFFFF', colors.accentThumb] })
-                : '#FFFFFF',
-            shadowColor: '#000',
+                ? progress.interpolate({ inputRange: [0, 1], outputRange: [palette.white, colors.accentThumb] })
+                : palette.white,
+            shadowColor: palette.black,
             shadowOffset: { width: 0, height: 3 },
             shadowOpacity: 0.15,
             shadowRadius: 4,

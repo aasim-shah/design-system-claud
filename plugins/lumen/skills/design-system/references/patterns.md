@@ -10,6 +10,7 @@ block below is typechecked against the real packages in the Lumen repo's CI.
 3. Dashboard (web) — sidebar shell, stats cards, table with menu, empty/loading/error states
 4. Settings screen with tab bar (React Native)
 5. Data-state helper (web) — one component for loading/empty/error/ready
+6. Product grid (web) — repeated card actions stay quiet, one primary page action
 
 ---
 
@@ -292,5 +293,70 @@ export function DataState<T>({
     );
   if (items.length === 0) return <EmptyState icon={<InboxIcon />} title={emptyTitle} actions={emptyAction} />;
   return <>{children(items)}</>;
+}
+```
+
+## 6. Product grid (web)
+
+Every card has the same action, so none of them is the page's main action. They use `tinted`, and
+the one `filled` button is the action the page exists for.
+
+```tsx
+// @check web product-grid.tsx
+'use client';
+import { useState } from 'react';
+import { Badge, Button, Card, CartIcon, HStack, PlusIcon, Text, VStack, useToast } from '@lumen/react';
+
+type Product = { id: string; name: string; price: number; tag?: string };
+
+const money = (n: number) => n.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+
+export default function Shop({ products }: { products: Product[] }) {
+  const toast = useToast();
+  const [cart, setCart] = useState<string[]>([]);
+
+  return (
+    <main style={{ maxWidth: 1080, margin: '0 auto', padding: '32px 16px 64px' }}>
+      <VStack gap={8}>
+        <HStack justify="between" wrap gap={3}>
+          <VStack gap={1}>
+            <Text variant="largeTitle" as="h1">Shop</Text>
+            <Text variant="subheadline" color="secondary">{products.length} products</Text>
+          </VStack>
+          <Button leadingIcon={<CartIcon />} disabled={cart.length === 0} href="/checkout">
+            Checkout{cart.length > 0 ? ` (${cart.length})` : ''}
+          </Button>
+        </HStack>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 16 }}>
+          {products.map((p) => (
+            <Card key={p.id}>
+              <VStack gap={4}>
+                <div style={{ aspectRatio: '4 / 3', borderRadius: 14, background: 'var(--lm-color-fill-tertiary)' }} />
+                <VStack gap={1}>
+                  <HStack justify="between" gap={2}>
+                    <Text variant="headline">{p.name}</Text>
+                    {p.tag && <Badge tone="neutral" size="sm">{p.tag}</Badge>}
+                  </HStack>
+                  <Text variant="body" color="secondary" tabular>{money(p.price)}</Text>
+                </VStack>
+                <Button
+                  variant="tinted"
+                  fullWidth
+                  leadingIcon={<PlusIcon />}
+                  onClick={() => {
+                    setCart((c) => [...c, p.id]);
+                    toast.success('Added to cart', { description: p.name });
+                  }}
+                >
+                  Add to cart
+                </Button>
+              </VStack>
+            </Card>
+          ))}
+        </div>
+      </VStack>
+    </main>
+  );
 }
 ```
