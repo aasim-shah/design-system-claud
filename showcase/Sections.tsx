@@ -20,8 +20,20 @@ import {
   FormRow,
   FormSection,
   HStack,
-  Icon,
+  ArchiveIcon,
+  ChartIcon,
+  CopyIcon,
+  EditIcon,
+  FolderIcon,
+  HelpIcon,
+  HomeIcon,
   IconButton,
+  IconCircle,
+  InboxIcon,
+  SettingsIcon,
+  ShareIcon,
+  TrashIcon,
+  UserIcon,
   Kbd,
   Menu,
   MoreIcon,
@@ -51,23 +63,8 @@ import {
 } from '@lumen/react';
 import { Demo, Section } from './layout';
 
-/* Demo glyphs (24px stroke — any icon set with the same grid matches) */
-const g = (d: string) => () => (
-  <Icon>
-    <path d={d} />
-  </Icon>
-);
-const HomeIcon = g('M3.5 10.5L12 3.5l8.5 7M5.5 9v11h13V9');
-const InboxIcon = g('M3.5 13.5h5l1.5 2.5h4l1.5-2.5h5M5.5 5h13l2 8.5V19H3.5v-5.5z');
-const UserIcon = g('M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4.5 20.5a7.5 7.5 0 0 1 15 0');
-const GearIcon = g('M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM19.4 13.5l1.6 1.2-2 3.4-1.9-.8a7 7 0 0 1-2.1 1.2L14.7 21h-4l-.3-2.5a7 7 0 0 1-2.1-1.2l-1.9.8-2-3.4 1.6-1.2a7 7 0 0 1 0-3L4.4 9.3l2-3.4 1.9.8a7 7 0 0 1 2.1-1.2L10.7 3h4l.3 2.5a7 7 0 0 1 2.1 1.2l1.9-.8 2 3.4-1.6 1.2a7 7 0 0 1 0 3z');
-const ChartIcon = g('M4 20V10M10 20V4M16 20v-7M22 20H2');
-const FolderIcon = g('M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2v8.5a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2z');
-const PencilIcon = g('M4 20h4L19.5 8.5a2.1 2.1 0 0 0-4-4L4 16z');
-const CopyIcon = g('M9 9h11v11H9zM5 15H4V4h11v1');
-const TrashIcon = g('M4 7h16M9 7V4h6v3M6.5 7l1 13h9l1-13');
-const ShareIcon = g('M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7');
-const ArchiveIcon = g('M3.5 4.5h17v4h-17zM5 8.5V19h14V8.5M10 12.5h4');
+const PencilIcon = EditIcon;
+const GearIcon = SettingsIcon;
 
 /* ------------------------------------------------------------------ Forms */
 
@@ -676,7 +673,7 @@ export function OverlaysSection() {
               )}
             </Popover>
             <Tooltip content="Tooltips explain icons. Keep them short.">
-              <IconButton label="Info" icon={<Icon><circle cx="12" cy="12" r="9" /><path d="M12 11v5.5M12 7.6v.1" /></Icon>} />
+              <IconButton label="Help" icon={<HelpIcon />} />
             </Tooltip>
             <Tooltip content="Also on keyboard focus" side="bottom">
               <Button variant="plain">Hover me</Button>

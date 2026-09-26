@@ -190,7 +190,7 @@ export function Sheet({
               <span />
             )}
             {headerTrailing ?? (
-              <IconButton label="Close" size="sm" icon={<CloseIcon strokeWidth={2.6} />} onClick={onClose} />
+              <IconButton label="Close" size="sm" icon={<CloseIcon strokeWidth={2} />} onClick={onClose} />
             )}
           </div>
           <div className="lm-modal__content">{children}</div>

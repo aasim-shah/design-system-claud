@@ -15,6 +15,12 @@ import {
   Icon,
   IconButton,
   InfoIcon,
+  WifiIcon,
+  BellIcon,
+  MoonIcon,
+  LockIcon,
+  HeartIcon,
+  ShareIcon,
   List,
   ListIcon,
   ListItem,
@@ -47,40 +53,15 @@ import {
 import { Section, Demo } from './layout';
 import { DataSection, FormsSection, NavigationSection, OverlaysSection } from './Sections';
 import { SpecsSection } from './Specs';
+import { IconsSection } from './Icons';
 
 /* Small inline glyphs for the demo (any 24px stroke icon set works) */
-const Wifi = () => (
-  <Icon strokeWidth={2.4}>
-    <path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.8 16a5 5 0 0 1 6.4 0" />
-    <circle cx="12" cy="19.2" r="0.6" fill="currentColor" />
-  </Icon>
-);
-const Bell = () => (
-  <Icon strokeWidth={2.4}>
-    <path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0" />
-  </Icon>
-);
-const Moon = () => (
-  <Icon strokeWidth={2.4}>
-    <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
-  </Icon>
-);
-const Lock = () => (
-  <Icon strokeWidth={2.4}>
-    <rect x="5" y="11" width="14" height="10" rx="2" />
-    <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-  </Icon>
-);
-const Heart = () => (
-  <Icon>
-    <path d="M12 20s-7.5-4.6-9.2-9.3C1.7 7.6 3.8 4.5 7 4.5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.2 0 5.3 3.1 4.2 6.2C19.5 15.4 12 20 12 20z" />
-  </Icon>
-);
-const Share = () => (
-  <Icon>
-    <path d="M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
-  </Icon>
-);
+const Wifi = WifiIcon;
+const Bell = BellIcon;
+const Moon = MoonIcon;
+const Lock = LockIcon;
+const Heart = HeartIcon;
+const Share = ShareIcon;
 
 function Swatch({ name, token, light, dark }: { name: string; token: string; light: string; dark: string }) {
   const { scheme } = useTheme();
@@ -305,14 +286,14 @@ function Buttons() {
           <Button tone="danger" variant="tinted">
             Remove
           </Button>
-          <Button variant="gray" leadingIcon={<CheckIcon strokeWidth={2.6} />}>
+          <Button variant="gray" leadingIcon={<CheckIcon strokeWidth={2} />}>
             Done
           </Button>
         </HStack>
       </Demo>
       <Demo label="Sizes, icons & states">
         <HStack gap={3} wrap>
-          <Button size="sm" variant="tinted" leadingIcon={<PlusIcon strokeWidth={2.6} />}>
+          <Button size="sm" variant="tinted" leadingIcon={<PlusIcon strokeWidth={2} />}>
             Add
           </Button>
           <Button size="lg" shape="capsule">
@@ -330,7 +311,7 @@ function Buttons() {
           <Button disabled>Disabled</Button>
           <IconButton label="Favorite" icon={<Heart />} />
           <IconButton label="Share" icon={<Share />} variant="tinted" />
-          <IconButton label="Add" icon={<PlusIcon strokeWidth={2.6} />} variant="filled" size="sm" />
+          <IconButton label="Add" icon={<PlusIcon strokeWidth={2} />} variant="filled" size="sm" />
         </HStack>
       </Demo>
     </VStack>
@@ -456,7 +437,7 @@ function SettingsExample() {
       <div className="sc-phone__screen lm-canvas-grouped">
         <NavigationBar
           leading={
-            <Button variant="plain" size="sm" leadingIcon={<ChevronLeftIcon strokeWidth={2.6} />}>
+            <Button variant="plain" size="sm" leadingIcon={<ChevronLeftIcon strokeWidth={2} />}>
               Back
             </Button>
           }
@@ -767,6 +748,7 @@ export function App() {
         <main className="sc-main">
           <Hero />
           <Foundations />
+          <IconsSection />
           <SpecsSection />
           <Components />
           <FormsSection />

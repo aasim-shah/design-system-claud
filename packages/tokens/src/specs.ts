@@ -61,7 +61,8 @@ export const radiusUsage: UsageRow[] = [
   { token: 'radius-sm', value: `${radius.sm}px`, use: 'Menu items, tooltips, small inputs, skeleton blocks.' },
   { token: 'radius-md', value: `${radius.md}px`, use: 'Inputs, list groups, segmented control, pagination, stepper.' },
   { token: 'radius-lg', value: `${radius.lg}px`, use: 'Large buttons, alerts, popovers & menus, tables, action sheets, dropzones.' },
-  { token: 'radius-xl', value: `${radius.xl}px`, use: 'Cards and demo panels.' },
+  { token: 'radius-xl', value: `${radius.xl}px`, use: 'List groups, alerts, small cards.' },
+  { token: 'card', value: '24px', use: 'Default cards (32 for large). Inner items: 24 − padding.' },
   { token: 'radius-2xl', value: `${radius['2xl']}px`, use: 'Dialogs, bottom sheets, large cards.' },
   { token: 'radius-full', value: '9999px', use: 'Switches, chips, badges, avatars, small (sm) buttons, toasts, progress.' },
   { token: 'button · md', value: '12px', use: 'Default button. Capsule shape available for hero actions.' },
@@ -70,7 +71,7 @@ export const radiusUsage: UsageRow[] = [
 /** Borders, separators and focus. */
 export const borderRules: UsageRow[] = [
   { token: 'hairline', value: `${size.hairline}px (1px on 1× screens)`, use: 'List separators, table rows, section dividers.' },
-  { token: 'separator inset', value: '16px · 57px with icon', use: 'Row separators start where the text starts, never at the edge.' },
+  { token: 'separator inset', value: '12px · 56px with icon', use: 'Row separators start where the text starts and stop 12 before the edge. They hide next to a highlighted row.' },
   { token: 'outline', value: '1px separator color', use: 'Outline buttons, outlined cards, chips. Never darker than the separator.' },
   { token: 'input ring', value: '1.5px accent + 4px halo', use: 'Focused inputs. Errors swap the accent for danger.' },
   { token: 'focus ring', value: '3–4px focus color, 2px offset', use: 'Keyboard focus only (:focus-visible), on every interactive element.' },
@@ -134,6 +135,8 @@ export interface ComponentSpec {
 
 /** Exact measurements per component (web & native share them). */
 export const componentSpecs: ComponentSpec[] = [
+  { component: 'Icon', height: '16 · 18 · 20 · 24 · 28', padding: '—', radius: '—', type: '—', notes: 'Lumen Rounded, 24 grid, stroke 1.75 (2–2.25 at 16 and below), round caps and joins.' },
+  { component: 'Icon circle', height: '24 · 28 · 32 · 44 · 56', padding: '—', radius: 'full', type: '—', notes: 'Glyph = 56% of the circle. Soft, outline, solid and tinted (14%) variants.' },
   { component: 'Button · sm', height: '32', padding: '0 12', radius: 'full', type: 'Subheadline 15 · 600', notes: 'Icon 16, gap 4.' },
   { component: 'Button · md', height: '44', padding: '0 20', radius: '12', type: 'Headline 17 · 600', notes: 'Default. Icon 18, gap 8. Plain: padding 0 8.' },
   { component: 'Button · lg', height: '52', padding: '0 24', radius: '14', type: 'Headline 17 · 600', notes: 'Primary call to action, full-width on phones.' },
@@ -152,9 +155,10 @@ export const componentSpecs: ComponentSpec[] = [
   { component: 'Chip', height: '32', padding: '0 12', radius: 'full', type: 'Subheadline 15 · 500', notes: 'Gap 8 between chips. Selected = accent fill.' },
   { component: 'Badge', height: '22 (18)', padding: '0 8 (0 6)', radius: 'full', type: 'Caption 12 · 600', notes: 'Dot 6. Count bubble min-width = height.' },
   { component: 'Avatar', height: '24 / 32 / 40 / 56 / 80', padding: '—', radius: 'full · 22.5%', type: 'Initials 40% of size', notes: 'Status dot 28% with 2px ring.' },
-  { component: 'List row', height: 'min 44', padding: '8 16', radius: 'group 10', type: 'Body 17', notes: 'Icon tile 29 (r 7), gap 12, chevron 14. Section header 13 uppercase.' },
-  { component: 'Card', height: '—', padding: '20 (12 / 32)', radius: '20 (14 / 28)', type: '—', notes: 'Elevated = shadow 2 + hairline. Hover lifts 2px.' },
-  { component: 'Alert', height: '—', padding: '16', radius: '14', type: 'Subheadline 15', notes: 'Icon 20, gap 12. Only the icon carries color.' },
+  { component: 'List group', height: '—', padding: '6', radius: '20', type: '—', notes: 'A padded card. Rows float inside with a rounded (14) press highlight.' },
+  { component: 'List row', height: 'min 52', padding: '8 12', radius: '14', type: 'Body 17', notes: 'Icon circle 32 (glyph 18), gap 12, chevron 14. Separators inset 12 each side. Section header 13 · 500 uppercase.' },
+  { component: 'Card', height: '—', padding: '24 (16 / 32)', radius: '24 (20 / 32)', type: '—', notes: 'Elevated = shadow 2 + hairline. Hover lifts 2px.' },
+  { component: 'Alert', height: '—', padding: '16 20 16 16', radius: '20', type: 'Subheadline 15', notes: 'Icon in a 32 tinted circle, gap 12. Only the icon carries color.' },
   { component: 'Table', height: 'header 40 · row 52', padding: '0 16', radius: 'wrap 14', type: 'Subheadline 15', notes: 'Header 13 · 500 secondary. Tabular numbers, amounts right-aligned.' },
   { component: 'Tabs', height: '44', padding: '0 · gap 24', radius: 'indicator 2', type: 'Subheadline 15 · 500', notes: 'Indicator 2px, label color on selection.' },
   { component: 'Breadcrumbs', height: '20', padding: '—', radius: '—', type: 'Subheadline 15', notes: 'Chevron 12, gap 4. Collapses middle after 4 items.' },

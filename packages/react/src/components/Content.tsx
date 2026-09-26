@@ -35,7 +35,7 @@ export function Alert({ tone = 'neutral', title, children, icon, actions, onDism
       </div>
       {onDismiss && (
         <button type="button" className="lm-btn lm-alert__close" data-variant="plain" data-icon-only="" data-size="sm" data-tone="neutral" aria-label="Dismiss" onClick={onDismiss}>
-          <CloseIcon strokeWidth={2.4} />
+          <CloseIcon strokeWidth={2} />
         </button>
       )}
     </div>

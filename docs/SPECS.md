@@ -56,7 +56,8 @@ Everything sits on a **4pt grid**. Where two values appear, like `44 (32 / 52)`,
 | `radius-sm` | 8px | Menu items, tooltips, small inputs, skeleton blocks. |
 | `radius-md` | 10px | Inputs, list groups, segmented control, pagination, stepper. |
 | `radius-lg` | 14px | Large buttons, alerts, popovers & menus, tables, action sheets, dropzones. |
-| `radius-xl` | 20px | Cards and demo panels. |
+| `radius-xl` | 20px | List groups, alerts, small cards. |
+| `card` | 24px | Default cards (32 for large). Inner items: 24 − padding. |
 | `radius-2xl` | 28px | Dialogs, bottom sheets, large cards. |
 | `radius-full` | 9999px | Switches, chips, badges, avatars, small (sm) buttons, toasts, progress. |
 | `button · md` | 12px | Default button. Capsule shape available for hero actions. |
@@ -89,7 +90,7 @@ Everything sits on a **4pt grid**. Where two values appear, like `44 (32 / 52)`,
 | Token | Value | Use for |
 | --- | --- | --- |
 | `hairline` | 0.5px (1px on 1× screens) | List separators, table rows, section dividers. |
-| `separator inset` | 16px · 57px with icon | Row separators start where the text starts, never at the edge. |
+| `separator inset` | 12px · 56px with icon | Row separators start where the text starts and stop 12 before the edge. They hide next to a highlighted row. |
 | `outline` | 1px separator color | Outline buttons, outlined cards, chips. Never darker than the separator. |
 | `input ring` | 1.5px accent + 4px halo | Focused inputs. Errors swap the accent for danger. |
 | `focus ring` | 3–4px focus color, 2px offset | Keyboard focus only (:focus-visible), on every interactive element. |
@@ -145,6 +146,8 @@ Springs: `snappy` (buttons, toggles), `smooth` (thumbs, layout) and `gentle` (sh
 
 | Component | Height | Padding | Radius | Type | Notes |
 | --- | --- | --- | --- | --- | --- |
+| **Icon** | 16 · 18 · 20 · 24 · 28 | — | — | — | Lumen Rounded, 24 grid, stroke 1.75 (2–2.25 at 16 and below), round caps and joins. |
+| **Icon circle** | 24 · 28 · 32 · 44 · 56 | — | full | — | Glyph = 56% of the circle. Soft, outline, solid and tinted (14%) variants. |
 | **Button · sm** | 32 | 0 12 | full | Subheadline 15 · 600 | Icon 16, gap 4. |
 | **Button · md** | 44 | 0 20 | 12 | Headline 17 · 600 | Default. Icon 18, gap 8. Plain: padding 0 8. |
 | **Button · lg** | 52 | 0 24 | 14 | Headline 17 · 600 | Primary call to action, full-width on phones. |
@@ -163,9 +166,10 @@ Springs: `snappy` (buttons, toggles), `smooth` (thumbs, layout) and `gentle` (sh
 | **Chip** | 32 | 0 12 | full | Subheadline 15 · 500 | Gap 8 between chips. Selected = accent fill. |
 | **Badge** | 22 (18) | 0 8 (0 6) | full | Caption 12 · 600 | Dot 6. Count bubble min-width = height. |
 | **Avatar** | 24 / 32 / 40 / 56 / 80 | — | full · 22.5% | Initials 40% of size | Status dot 28% with 2px ring. |
-| **List row** | min 44 | 8 16 | group 10 | Body 17 | Icon tile 29 (r 7), gap 12, chevron 14. Section header 13 uppercase. |
-| **Card** | — | 20 (12 / 32) | 20 (14 / 28) | — | Elevated = shadow 2 + hairline. Hover lifts 2px. |
-| **Alert** | — | 16 | 14 | Subheadline 15 | Icon 20, gap 12. Only the icon carries color. |
+| **List group** | — | 6 | 20 | — | A padded card. Rows float inside with a rounded (14) press highlight. |
+| **List row** | min 52 | 8 12 | 14 | Body 17 | Icon circle 32 (glyph 18), gap 12, chevron 14. Separators inset 12 each side. Section header 13 · 500 uppercase. |
+| **Card** | — | 24 (16 / 32) | 24 (20 / 32) | — | Elevated = shadow 2 + hairline. Hover lifts 2px. |
+| **Alert** | — | 16 20 16 16 | 20 | Subheadline 15 | Icon in a 32 tinted circle, gap 12. Only the icon carries color. |
 | **Table** | header 40 · row 52 | 0 16 | wrap 14 | Subheadline 15 | Header 13 · 500 secondary. Tabular numbers, amounts right-aligned. |
 | **Tabs** | 44 | 0 · gap 24 | indicator 2 | Subheadline 15 · 500 | Indicator 2px, label color on selection. |
 | **Breadcrumbs** | 20 | — | — | Subheadline 15 | Chevron 12, gap 4. Collapses middle after 4 items. |

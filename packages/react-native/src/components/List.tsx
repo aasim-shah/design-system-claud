@@ -1,4 +1,7 @@
-import { Children, cloneElement, isValidElement, type ReactElement, type ReactNode } from 'react';
+import { Children, cloneElement, isValidElement, useState, type ReactElement, type ReactNode } from 'react';
+
+const LIST_PAD = 6;
+const LIST_RADIUS = 20;
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useTheme } from '../theme/ThemeProvider.js';
 import { Glyph } from './Glyph.js';
@@ -16,13 +19,13 @@ export function ListSection({ header, footer, children, style }: ListSectionProp
   return (
     <View style={style}>
       {header && (
-        <Text variant="footnote" color="secondary" style={{ paddingHorizontal: 16, paddingBottom: 6, textTransform: 'uppercase' }}>
+        <Text variant="footnote" weight="medium" color="secondary" style={{ paddingHorizontal: 20, paddingBottom: 8, textTransform: 'uppercase', letterSpacing: 0.3 }}>
           {header}
         </Text>
       )}
       {children}
       {footer && (
-        <Text variant="footnote" color="secondary" style={{ paddingHorizontal: 16, paddingTop: 6 }}>
+        <Text variant="footnote" color="secondary" style={{ paddingHorizontal: 20, paddingTop: 8 }}>
           {footer}
         </Text>
       )}
@@ -38,21 +41,23 @@ export interface ListProps {
 }
 
 export function List({ children, variant = 'inset', style }: ListProps) {
-  const { colors, radius } = useTheme();
+  const { colors } = useTheme();
   const rows = Children.toArray(children).filter(isValidElement) as ReactElement<ListItemProps>[];
+  const plain = variant === 'plain';
   return (
     <View
       style={[
         {
-          borderRadius: variant === 'plain' ? 0 : radius.md,
-          overflow: 'hidden',
+          // Padded card: rows float inside with their own rounded highlight.
+          padding: plain ? 0 : LIST_PAD,
+          borderRadius: plain ? 0 : LIST_RADIUS,
           backgroundColor:
             variant === 'plain' ? 'transparent' : variant === 'filled' ? colors.background.secondary : colors.background.groupedSecondary,
         },
         style,
       ]}
     >
-      {rows.map((row, i) => cloneElement(row, { separator: i > 0 }))}
+      {rows.map((row, i) => cloneElement(row, { separator: i > 0, rounded: !plain }))}
     </View>
   );
 }
@@ -71,6 +76,8 @@ export interface ListItemProps {
   onPress?: () => void;
   /** @internal injected by <List> */
   separator?: boolean;
+  /** @internal injected by <List> */
+  rounded?: boolean;
 }
 
 export function ListItem({
@@ -85,34 +92,39 @@ export function ListItem({
   disabled,
   onPress,
   separator,
+  rounded = true,
 }: ListItemProps) {
-  const { colors, palette, opacity } = useTheme();
+  const { colors, opacity } = useTheme();
+  const [pressed, setPressed] = useState(false);
   const showChevron = chevron ?? (!!onPress && selected === undefined && !destructive);
-  const inset = leading ? 16 + 29 + 12 : 16;
+  const inset = leading ? 12 + 32 + 12 : 12;
 
   return (
     <Pressable
       disabled={!onPress || disabled}
       onPress={onPress}
+      onPressIn={() => setPressed(true)}
+      onPressOut={() => setPressed(false)}
       accessibilityRole={onPress ? 'button' : undefined}
       accessibilityState={{ selected, disabled }}
-      style={({ pressed }) => ({
-        minHeight: 44,
-        paddingHorizontal: 16,
+      style={{
+        minHeight: 52,
+        paddingHorizontal: 12,
         paddingVertical: 8,
         flexDirection: 'row',
         alignItems: 'center',
         gap: 12,
-        backgroundColor: pressed ? palette.gray4 : 'transparent',
+        borderRadius: rounded ? LIST_RADIUS - LIST_PAD : 0,
+        backgroundColor: pressed ? colors.fill.tertiary : 'transparent',
         opacity: disabled ? opacity.disabled : 1,
-      })}
+      }}
     >
-      {separator && (
+      {separator && !pressed && (
         <View
           style={{
             position: 'absolute',
             top: 0,
-            right: 0,
+            right: 12,
             left: inset,
             height: StyleSheet.hairlineWidth,
             backgroundColor: colors.separator.default,
@@ -157,15 +169,15 @@ export interface ListIconProps {
   color?: string;
 }
 
-/** Rounded, colored icon tile for list rows (29×29, like iOS Settings). */
+/** Circular icon tile for list rows (32×32). Neutral by default. */
 export function ListIcon({ children, color }: ListIconProps) {
   const { colors } = useTheme();
   return (
     <View
       style={{
-        width: 29,
-        height: 29,
-        borderRadius: 7,
+        width: 32,
+        height: 32,
+        borderRadius: 16,
         backgroundColor: color ?? colors.fill.tertiary,
         alignItems: 'center',
         justifyContent: 'center',

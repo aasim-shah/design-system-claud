@@ -1,0 +1,28 @@
+{
+  "name": "@lumen/icons",
+  "version": "0.1.0",
+  "description": "Lumen Rounded — 85 soft, rounded 24px icons for React and React Native.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.js" },
+    "./react": { "types": "./dist/react.d.ts", "default": "./dist/react.js" },
+    "./native": { "types": "./dist/native.d.ts", "react-native": "./dist/native.js", "default": "./dist/native.js" },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-native-svg": ">=13"
+  },
+  "peerDependenciesMeta": {
+    "react-native-svg": { "optional": true }
+  },
+  "license": "MIT"
+}

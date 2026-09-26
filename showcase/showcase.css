@@ -81,6 +81,7 @@
 
 /* ---- Navigation ---- */
 .sc-split--nav { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; }
+@media (max-width: 900px) { .sc-split--nav { grid-template-columns: minmax(0, 1fr); } }
 .sc-shell { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 420px; border-radius: var(--lm-radius-xl); overflow: hidden; box-shadow: inset 0 0 0 1px var(--lm-color-separator); }
 .sc-shell__side { padding: var(--lm-space-4) var(--lm-space-2); background: var(--lm-color-background-secondary); box-shadow: inset -0.5px 0 0 var(--lm-color-separator); }
 .sc-shell__main { padding: var(--lm-space-6); min-width: 0; }
@@ -89,3 +90,20 @@
 .sc-phone__screen--tabs { height: 600px; display: flex; flex-direction: column; overflow: hidden; }
 .sc-phone__content { flex: 1; padding: 56px var(--lm-space-4) var(--lm-space-4); overflow: auto; }
 .sc-phone__screen--tabs .lm-tabbar { padding-bottom: 22px; }
+
+/* ---- Icons ---- */
+.sc-grid--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 900px) { .sc-grid--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .sc-grid--4 { grid-template-columns: minmax(0, 1fr); } }
+.sc-icons { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: var(--lm-space-2); }
+.sc-icon {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--lm-space-2);
+  height: 96px; padding: var(--lm-space-2); border: 0; border-radius: var(--lm-radius-lg);
+  background: var(--lm-color-fill-quaternary); color: var(--lm-color-label-primary); cursor: pointer;
+  transition: background-color var(--lm-duration-fast), transform var(--lm-duration-fast);
+}
+.sc-icon .lm-icon { --lm-icon-size: 26px; }
+.sc-icon span { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--lm-color-label-secondary); }
+.sc-icon:hover { background: var(--lm-color-fill-tertiary); }
+.sc-icon:active { transform: scale(0.96); }
+.sc-icon:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--lm-color-focus); }

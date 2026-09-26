@@ -406,7 +406,7 @@ export function FileDrop({ label, hint, accept, multiple, maxSize, files, onFile
                 aria-label={`Remove ${f.name}`}
                 onClick={() => setList(list.filter((_, j) => j !== i))}
               >
-                <CloseIcon strokeWidth={2.4} />
+                <CloseIcon strokeWidth={2} />
               </button>
             </li>
           ))}

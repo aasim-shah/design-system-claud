@@ -6,6 +6,7 @@ import { createElement as h } from 'react';
 import { renderToString } from 'react-dom/server';
 import * as T from '@lumen/tokens';
 import * as UI from '@lumen/react';
+import * as Icons from '@lumen/icons';
 
 let passed = 0;
 const test = (name, fn) => {
@@ -107,6 +108,8 @@ const cases = {
   PinInput: h(UI.PinInput, { length: 6, groupSize: 3, defaultValue: '12' }),
   PasswordField: h(UI.PasswordField, { label: 'Password', showStrength: true, defaultValue: 'Abc12345!' }),
   FileDrop: h(UI.FileDrop, { label: 'Upload', hint: 'PNG' }),
+  IconCircle: h(UI.IconCircle, { icon: h(UI.WifiIcon), variant: 'tinted', color: 'red' }),
+  AllIcons: h('div', null, ...Icons.iconNames.map((n) => h(UI.LumenIcon, { key: n, name: n }))),
   Providers: h(UI.ThemeProvider, { accent: '#FF2D55' }, h(UI.ToastProvider, null, 'app')),
 };
 
@@ -131,6 +134,16 @@ test('password strength scoring', () => {
 test('specs cover the component set', () => {
   assert.ok(T.componentSpecs.length >= 35);
   assert.ok(T.spacingUsage.every((r) => r.use.length > 0));
+});
+
+test('every icon is categorised exactly once and exported as a component', () => {
+  const listed = Object.values(Icons.iconCategories).flat();
+  assert.equal(listed.length, Icons.iconNames.length);
+  assert.deepEqual([...listed].sort(), [...Icons.iconNames].sort());
+  for (const n of Icons.iconNames) {
+    const name = n.replace(/(^|-)(\w)/g, (_, __, c) => c.toUpperCase()) + 'Icon';
+    assert.ok(UI[name], `missing export ${name}`);
+  }
 });
 
 test('SSR markup details', () => {

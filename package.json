@@ -5,11 +5,12 @@
   "description": "Lumen — a calm, minimal design system for React (web / Next.js) and React Native, inspired by the clarity of iOS.",
   "workspaces": [
     "packages/tokens",
+    "packages/icons",
     "packages/react",
     "packages/react-native"
   ],
   "scripts": {
-    "build": "npm run build -w @lumen/tokens && npm run build -w @lumen/react && npm run build -w @lumen/react-native",
+    "build": "npm run build -w @lumen/tokens && npm run build -w @lumen/icons && npm run build -w @lumen/react && npm run build -w @lumen/react-native",
     "typecheck": "npm run build && npm run typecheck --workspaces --if-present && tsc -p tsconfig.examples.json",
     "test": "npm run build && node scripts/smoke-test.mjs",
     "showcase": "npm run build && node scripts/build-showcase.mjs",
@@ -22,6 +23,7 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-native": "^0.87.1",
+    "react-native-svg": "^15.15.5",
     "typescript": "^5.9.3"
   },
   "engines": {

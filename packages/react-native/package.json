@@ -23,7 +23,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@lumen/tokens": "0.1.0"
+    "@lumen/tokens": "0.1.0",
+    "@lumen/icons": "0.1.0"
   },
   "peerDependencies": {
     "react": ">=18",

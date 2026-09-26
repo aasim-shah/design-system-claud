@@ -7,6 +7,7 @@ matching component libraries for **React / Next.js** and **React Native / Expo**
 
 ```
 packages/
+├── icons/          @lumen/icons         Lumen Rounded: 85 soft 24px icons for React (./react) and React Native (./native)
 ├── tokens/         @lumen/tokens        Colors, type, spacing, radius, elevation, motion → TS, CSS vars, JSON, Tailwind
 ├── react/          @lumen/react         Web components (Next.js App Router ready, SSR safe, zero runtime CSS-in-JS)
 └── react-native/   @lumen/react-native  Native components (no native deps: no SVG, no Reanimated, no safe-area lib)
@@ -261,6 +262,9 @@ The same component names and props exist on both platforms, where the platform a
 | `Kbd` | ✓ | – | Keyboard shortcut keys |
 
 ### Icons
+
+**Lumen Rounded** (`@lumen/icons`) is the system's own icon set: 85 icons on a 24px grid, 1.75 stroke, round ends, soft 2–3.5 corners and small filled dots as a signature detail. On the web they're re-exported from `@lumen/react` (`<HomeIcon />`, `<LumenIcon name="home" />`). On React Native, import from `@lumen/icons/native` (requires `react-native-svg`). `IconCircle` is the signature container: soft, outline, solid or tinted circles used by list rows, alerts, empty states and more.
+
 
 Lumen's own icons cover what the components need: chevrons, check, close, plus, search, info and alerts.
 For your app icons, use any 24px stroke set at `strokeWidth={2}`, for example [Lucide](https://lucide.dev) (`lucide-react`, `lucide-react-native`).

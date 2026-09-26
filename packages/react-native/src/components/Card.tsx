@@ -14,8 +14,8 @@ export interface CardProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const pad = { none: 0, sm: spacing[3], md: spacing[5], lg: spacing[8] };
-const rad = { none: 20, sm: 14, md: 20, lg: 28 };
+const pad = { none: 0, sm: spacing[4], md: spacing[6], lg: spacing[8] };
+const rad = { none: 24, sm: 20, md: 24, lg: 32 };
 
 export function Card({ children, variant = 'elevated', padding = 'md', onPress, accessibilityLabel, style }: CardProps) {
   const theme = useTheme();

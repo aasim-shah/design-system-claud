@@ -7,7 +7,6 @@ import {
   Button,
   Card,
   Dialog,
-  Glyph,
   List,
   ListIcon,
   ListItem,
@@ -25,6 +24,8 @@ import {
   useTheme,
   useToast,
 } from '@lumen/react-native';
+// Rounded icon set — needs `npx expo install react-native-svg`
+import { WifiIcon } from '@lumen/icons/native';
 
 export default function App() {
   return (
@@ -69,7 +70,7 @@ function Home() {
             <ListItem
               leading={
                 <ListIcon>
-                  <Glyph name="search" size={16} color={theme.colors.label.primary} />
+                  <WifiIcon size={18} color={theme.colors.label.primary} />
                 </ListIcon>
               }
               title="Wi-Fi"
