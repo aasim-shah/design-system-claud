@@ -44,6 +44,10 @@ import {
   type ColorSchemePreference,
 } from '@lumen/react';
 
+import { Section, Demo } from './layout';
+import { DataSection, FormsSection, NavigationSection, OverlaysSection } from './Sections';
+import { SpecsSection } from './Specs';
+
 /* Small inline glyphs for the demo (any 24px stroke icon set works) */
 const Wifi = () => (
   <Icon strokeWidth={2.4}>
@@ -77,40 +81,6 @@ const Share = () => (
     <path d="M12 3v12M7.5 7.5L12 3l4.5 4.5M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" />
   </Icon>
 );
-
-function Section({ id, eyebrow, title, lead, children }: { id: string; eyebrow: string; title: string; lead?: string; children: ReactNode }) {
-  return (
-    <section id={id} className="sc-section">
-      <VStack gap={2} className="sc-section__head">
-        <Text variant="subheadline" color="accent" weight="semibold">
-          {eyebrow}
-        </Text>
-        <Text variant="title1" as="h2" balance>
-          {title}
-        </Text>
-        {lead && (
-          <Text variant="body" color="secondary" className="sc-lead">
-            {lead}
-          </Text>
-        )}
-      </VStack>
-      {children}
-    </section>
-  );
-}
-
-function Demo({ label, children, grouped }: { label?: string; children: ReactNode; grouped?: boolean }) {
-  return (
-    <div className="sc-demo" data-grouped={grouped ? '' : undefined}>
-      {label && (
-        <Text variant="footnote" color="secondary" weight="medium" className="sc-demo__label">
-          {label}
-        </Text>
-      )}
-      {children}
-    </div>
-  );
-}
 
 function Swatch({ name, token, light, dark }: { name: string; token: string; light: string; dark: string }) {
   const { scheme } = useTheme();
@@ -797,7 +767,12 @@ export function App() {
         <main className="sc-main">
           <Hero />
           <Foundations />
+          <SpecsSection />
           <Components />
+          <FormsSection />
+          <NavigationSection />
+          <DataSection />
+          <OverlaysSection />
           <footer className="sc-footer">
             <Text variant="footnote" color="secondary" align="center">
               Lumen Design System · Tokens, React & React Native · MIT

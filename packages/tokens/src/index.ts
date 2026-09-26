@@ -26,3 +26,4 @@ export const tokens = {
   elevation,
   motion,
 } as const;
+export * from './specs.js';

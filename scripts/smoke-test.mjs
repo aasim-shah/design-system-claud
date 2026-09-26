@@ -87,6 +87,26 @@ const cases = {
   NavigationBar: h(UI.NavigationBar, { title: 'T', largeTitle: 'Large' }),
   Dialog: h(UI.Dialog, { open: false, onClose: noop, title: 'x' }),
   Sheet: h(UI.Sheet, { open: false, onClose: noop, title: 'x' }),
+  Form: h(UI.Form, null, h(UI.FormSection, { title: 'A', description: 'B' }, h(UI.FormRow, null, h(UI.TextField, { label: 'x' }))), h(UI.FormActions, null, 'go')),
+  Breadcrumbs: h(UI.Breadcrumbs, { items: [{ label: 'A', href: '/' }, { label: 'B', href: '/' }, { label: 'C', href: '/' }, { label: 'D', href: '/' }, { label: 'E' }], maxItems: 3 }),
+  Tabs: h(UI.Tabs, { items: [{ value: 'a', label: 'A', content: 'pa' }, { value: 'b', label: 'B', content: 'pb' }], defaultValue: 'b' }),
+  Pagination: h(UI.Pagination, { page: 5, pageCount: 20, onPageChange: noop }),
+  TabBar: h(UI.TabBar, { value: 'a', items: [{ value: 'a', label: 'A', icon: 'i', badge: 2 }] }),
+  Sidebar: h(UI.Sidebar, { value: 'a', sections: [{ heading: 'H', items: [{ value: 'a', label: 'A', count: 3 }] }] }),
+  Accordion: h(UI.Accordion, { items: [{ value: 'a', title: 'T', content: 'C' }], defaultValue: ['a'] }),
+  Menu: h(UI.Menu, { trigger: (p) => h('button', p, 'm'), items: [{ label: 'A' }, { type: 'separator' }] }),
+  Tooltip: h(UI.Tooltip, { content: 'tip' }, h('button', null, 'b')),
+  ActionSheet: h(UI.ActionSheet, { open: false, onClose: noop, actions: [{ label: 'A' }] }),
+  Alert: h(UI.Alert, { tone: 'warning', title: 'T', onDismiss: noop }, 'body'),
+  EmptyState: h(UI.EmptyState, { title: 'Empty', description: 'D' }),
+  Kbd: h(UI.Kbd, null, 'K'),
+  Table: h(UI.Table, { columns: [{ key: 'a', header: 'A' }], rows: [{ a: 1 }], rowKey: (r) => r.a }),
+  Steps: h(UI.Steps, { steps: [{ label: 'A' }, { label: 'B' }, { label: 'C' }], current: 1 }),
+  Chip: h(UI.ChipGroup, null, h(UI.Chip, { selected: true, onSelectedChange: noop }, 'A'), h(UI.Chip, { onRemove: noop }, 'B')),
+  Stepper: h(UI.Stepper, { label: 'Qty', defaultValue: 2 }),
+  PinInput: h(UI.PinInput, { length: 6, groupSize: 3, defaultValue: '12' }),
+  PasswordField: h(UI.PasswordField, { label: 'Password', showStrength: true, defaultValue: 'Abc12345!' }),
+  FileDrop: h(UI.FileDrop, { label: 'Upload', hint: 'PNG' }),
   Providers: h(UI.ThemeProvider, { accent: '#FF2D55' }, h(UI.ToastProvider, null, 'app')),
 };
 
@@ -97,7 +117,26 @@ for (const [name, el] of Object.entries(cases)) {
   });
 }
 
+test('pagination collapses long ranges', () => {
+  assert.deepEqual(UI.pageRange(5, 20), [1, 'gap', 4, 5, 6, 'gap', 20]);
+  assert.deepEqual(UI.pageRange(2, 5), [1, 2, 3, 4, 5]);
+  assert.deepEqual(UI.pageRange(4, 10), [1, 2, 3, 4, 5, 'gap', 10]);
+});
+
+test('password strength scoring', () => {
+  assert.equal(UI.passwordStrength('abc'), 0);
+  assert.equal(UI.passwordStrength('Abcdefgh12!?xyz'), 4);
+});
+
+test('specs cover the component set', () => {
+  assert.ok(T.componentSpecs.length >= 35);
+  assert.ok(T.spacingUsage.every((r) => r.use.length > 0));
+});
+
 test('SSR markup details', () => {
+  assert.match(renderToString(cases.Breadcrumbs), /aria-current="page"/);
+  assert.match(renderToString(cases.Breadcrumbs), /…/);
+  assert.match(renderToString(cases.Steps), /data-state="complete"/);
   assert.match(renderToString(cases.Badge), />99\+</);
   assert.match(renderToString(cases.Avatar), />JA</);
   assert.match(renderToString(cases.Segmented), /--lm-seg-index:1/);

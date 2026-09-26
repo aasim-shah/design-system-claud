@@ -20,7 +20,7 @@ import { Glyph } from './Glyph.js';
 import { Text } from './Text.js';
 
 /** Keeps a Modal mounted until its exit animation has finished. */
-function usePresence(open: boolean, enter: () => Animated.CompositeAnimation, exit: () => Animated.CompositeAnimation) {
+export function usePresence(open: boolean, enter: () => Animated.CompositeAnimation, exit: () => Animated.CompositeAnimation) {
   const [mounted, setMounted] = useState(open);
   useEffect(() => {
     if (open) {

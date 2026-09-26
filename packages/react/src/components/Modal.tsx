@@ -28,7 +28,7 @@ interface ModalBaseProps extends Omit<HTMLAttributes<HTMLDialogElement>, 'title'
  * Esc handling and inert background come for free from the browser.
  * Exit animations are played before the dialog actually closes.
  */
-function useDialog(open: boolean, onClose: () => void, dismissible: boolean) {
+export function useDialog(open: boolean, onClose: () => void, dismissible: boolean) {
   const ref = useRef<HTMLDialogElement>(null);
   const [closing, setClosing] = useState(false);
 

@@ -34,3 +34,4 @@ export {
   type SemanticColors,
   type TextVariant,
 } from '@lumen/tokens';
+export * from './components/Extended.js';

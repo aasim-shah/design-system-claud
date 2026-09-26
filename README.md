@@ -154,6 +154,8 @@ export default { presets: [lumen], content: ['./app/**/*.tsx'] };
 
 ## Foundations
 
+> **Full specs:** see [`docs/SPECS.md`](docs/SPECS.md) for spacing usage, page margins and gutters, radius per role, borders and focus, elevation, states, motion, layers, and exact measurements for every component. The same data is exported from `@lumen/tokens` (`spacingUsage`, `layoutRules`, `radiusUsage`, `componentSpecs`…).
+
 ### Color roles
 
 | Role | Use for |
@@ -233,6 +235,31 @@ The same component names and props exist on both platforms, where the platform a
 | `ThemeProvider` / `useTheme` | ✓ | ✓ | Scheme preference, brand accent, color overrides |
 | Icons / `Glyph` | ✓ | ✓ | Web: 24px stroke icons (Lucide-compatible). RN: dependency-free glyphs drawn with Views |
 
+### Extended components
+
+| Component | Web | Native | Notes |
+| --- | :-: | :-: | --- |
+| `Form` · `FormSection` · `FormRow` · `FormActions` | ✓ | `FormSection` | Consistent form rhythm. Rows stack on phones |
+| `PasswordField` | ✓ | ✓ | Show/hide toggle and optional strength meter |
+| `PinInput` | ✓ | ✓ | OTP/PIN with auto-advance, paste and SMS autofill (`one-time-code`) |
+| `Chip` · `ChipGroup` | ✓ | ✓ | Toggleable filter chips or removable tags |
+| `Stepper` | ✓ | ✓ | − value + for small bounded numbers |
+| `FileDrop` | ✓ | – | Drag-and-drop or browse, size limit, removable file list |
+| `Breadcrumbs` | ✓ | ✓ | Collapses the middle of long paths |
+| `Tabs` | ✓ | ✓ | Underline tabs with a sliding indicator and arrow keys |
+| `Pagination` | ✓ | – | Smart ellipsis, current page in the accent color |
+| `Sidebar` | ✓ | – | Desktop app navigation with sections and counts |
+| `TabBar` | ✓ | ✓ | Bottom navigation with badges (plug into React Navigation's `tabBar`) |
+| `Steps` | ✓ | ✓ | Wizard progress: complete, current and upcoming |
+| `Accordion` | ✓ | ✓ | Single or multiple open, animated height |
+| `Menu` · `Popover` | ✓ | – | Anchored, flips above when needed, keyboard navigation. On RN, use `ActionSheet` |
+| `Tooltip` | ✓ | – | On hover and focus, for short hints only |
+| `ActionSheet` | ✓ | ✓ | iOS-style choices with a separate Cancel |
+| `Alert` | ✓ | ✓ | Inline banner. Only the icon carries color |
+| `EmptyState` | ✓ | ✓ | Icon, message and next action |
+| `Table` | ✓ | – | Hairline rows, tabular numbers, row actions, empty state |
+| `Kbd` | ✓ | – | Keyboard shortcut keys |
+
 ### Icons
 
 Lumen's own icons cover what the components need: chevrons, check, close, plus, search, info and alerts.
@@ -263,6 +290,7 @@ npm run build        # tokens → react → react-native
 npm run typecheck    # all packages + examples
 npm test             # token contrast checks + SSR render of every web component
 npm run showcase     # → showcase/dist/index.html (single self-contained file, open it in a browser)
+npm run docs         # regenerate docs/SPECS.md from packages/tokens/src/specs.ts
 ```
 
 Tokens are the source of truth. Edit `packages/tokens/src/*`, and CSS variables, JSON, Tailwind and both component

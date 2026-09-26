@@ -91,3 +91,33 @@ export const XCircleIcon = make(
     <path d="M9.2 9.2l5.6 5.6M14.8 9.2l-5.6 5.6" />
   </>,
 );
+export const EyeIcon = make(
+  'EyeIcon',
+  <>
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" />
+    <circle cx="12" cy="12" r="3" />
+  </>,
+);
+export const EyeOffIcon = make(
+  'EyeOffIcon',
+  <>
+    <path d="M10.6 5.6A9.7 9.7 0 0 1 12 5.5C18 5.5 21.5 12 21.5 12a17 17 0 0 1-2.9 3.6M6.4 6.9C3.9 8.6 2.5 12 2.5 12S6 18.5 12 18.5c1.7 0 3.2-.5 4.5-1.2" />
+    <path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18" />
+  </>,
+);
+export const UploadIcon = make('UploadIcon', <path d="M12 16V4M7 9l5-5 5 5M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3" />);
+export const MoreIcon = make(
+  'MoreIcon',
+  <>
+    <circle cx="5.5" cy="12" r="1.2" fill="currentColor" />
+    <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+    <circle cx="18.5" cy="12" r="1.2" fill="currentColor" />
+  </>,
+);
+export const FileIcon = make(
+  'FileIcon',
+  <>
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+    <path d="M14 3v5h5" />
+  </>,
+);
