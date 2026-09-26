@@ -146,7 +146,7 @@ Springs: `snappy` (buttons, toggles), `smooth` (thumbs, layout) and `gentle` (sh
 
 | Component | Height | Padding | Radius | Type | Notes |
 | --- | --- | --- | --- | --- | --- |
-| **Icon** | 16 · 18 · 20 · 24 · 28 | — | — | — | Lumen Rounded, 24 grid, stroke 1.75 (2–2.25 at 16 and below), round caps and joins. |
+| **Icon** | 16 · 18 · 20 · 24 · 28 | — | — | — | Lumen Rounded, 24 grid, stroke 2, round caps and joins, no sharp corners: every tip and bend is curved. |
 | **Icon circle** | 24 · 28 · 32 · 44 · 56 | — | full | — | Glyph = 56% of the circle. Soft, outline, solid and tinted (14%) variants. |
 | **Button · sm** | 32 | 0 12 | full | Subheadline 15 · 600 | Icon 16, gap 4. |
 | **Button · md** | 44 | 0 20 | 12 | Headline 17 · 600 | Default. Icon 18, gap 8. Plain: padding 0 8. |

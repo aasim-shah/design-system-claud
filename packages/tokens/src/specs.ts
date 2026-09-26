@@ -135,7 +135,7 @@ export interface ComponentSpec {
 
 /** Exact measurements per component (web & native share them). */
 export const componentSpecs: ComponentSpec[] = [
-  { component: 'Icon', height: '16 · 18 · 20 · 24 · 28', padding: '—', radius: '—', type: '—', notes: 'Lumen Rounded, 24 grid, stroke 1.75 (2–2.25 at 16 and below), round caps and joins.' },
+  { component: 'Icon', height: '16 · 18 · 20 · 24 · 28', padding: '—', radius: '—', type: '—', notes: 'Lumen Rounded, 24 grid, stroke 2, round caps and joins, no sharp corners: every tip and bend is curved.' },
   { component: 'Icon circle', height: '24 · 28 · 32 · 44 · 56', padding: '—', radius: 'full', type: '—', notes: 'Glyph = 56% of the circle. Soft, outline, solid and tinted (14%) variants.' },
   { component: 'Button · sm', height: '32', padding: '0 12', radius: 'full', type: 'Subheadline 15 · 600', notes: 'Icon 16, gap 4.' },
   { component: 'Button · md', height: '44', padding: '0 20', radius: '12', type: 'Headline 17 · 600', notes: 'Default. Icon 18, gap 8. Plain: padding 0 8.' },

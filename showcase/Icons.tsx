@@ -24,7 +24,7 @@ import { Section } from './layout';
 export function IconsSection() {
   const toast = useToast();
   const [q, setQ] = useState('');
-  const [weight, setWeight] = useState('1.75');
+  const [weight, setWeight] = useState('2');
   const groups = useMemo(
     () =>
       Object.entries(iconCategories)
@@ -38,7 +38,7 @@ export function IconsSection() {
       id="icons"
       eyebrow="Icons"
       title="Lumen Rounded."
-      lead="85 icons drawn for this system on a 24px grid: 1.75 stroke, round ends, soft 2–3.5 corners and small filled dots as a signature detail. The same set ships for React and React Native, and circles hold them wherever an icon needs a container."
+      lead="85 icons drawn for this system on a 24px grid with a 2px stroke and no sharp edges anywhere: every tip, arrowhead, corner and point is curved, and small filled dots add a signature detail. The same set ships for React and React Native, and circles hold them wherever an icon needs a container."
     >
       <VStack gap={10}>
         <div className="sc-grid sc-grid--4">
@@ -79,8 +79,8 @@ export function IconsSection() {
             onValueChange={setWeight}
             options={[
               { value: '1.5', label: 'Light 1.5' },
-              { value: '1.75', label: 'Regular 1.75' },
-              { value: '2.25', label: 'Bold 2.25' },
+              { value: '2', label: 'Regular 2' },
+              { value: '2.5', label: 'Bold 2.5' },
             ]}
           />
         </HStack>

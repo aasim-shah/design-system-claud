@@ -1,7 +1,7 @@
 {
   "name": "@lumen/icons",
   "version": "0.1.0",
-  "description": "Lumen Rounded — 85 soft, rounded 24px icons for React and React Native.",
+  "description": "Lumen Rounded — 85 soft 24px icons with no sharp edges, for React and React Native.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

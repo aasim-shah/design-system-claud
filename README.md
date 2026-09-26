@@ -263,7 +263,7 @@ The same component names and props exist on both platforms, where the platform a
 
 ### Icons
 
-**Lumen Rounded** (`@lumen/icons`) is the system's own icon set: 85 icons on a 24px grid, 1.75 stroke, round ends, soft 2–3.5 corners and small filled dots as a signature detail. On the web they're re-exported from `@lumen/react` (`<HomeIcon />`, `<LumenIcon name="home" />`). On React Native, import from `@lumen/icons/native` (requires `react-native-svg`). `IconCircle` is the signature container: soft, outline, solid or tinted circles used by list rows, alerts, empty states and more.
+**Lumen Rounded** (`@lumen/icons`) is the system's own icon set: 85 icons on a 24px grid, 2px stroke, with no sharp edges: every tip, arrowhead and corner is curved, and small filled dots are a signature detail. On the web they're re-exported from `@lumen/react` (`<HomeIcon />`, `<LumenIcon name="home" />`). On React Native, import from `@lumen/icons/native` (requires `react-native-svg`). `IconCircle` is the signature container: soft, outline, solid or tinted circles used by list rows, alerts, empty states and more.
 
 
 Lumen's own icons cover what the components need: chevrons, check, close, plus, search, info and alerts.
