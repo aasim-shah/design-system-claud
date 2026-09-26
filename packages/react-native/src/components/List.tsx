@@ -153,7 +153,7 @@ export function ListItem({
 
 export interface ListIconProps {
   children: ReactNode;
-  /** Tile color. Defaults to the accent. */
+  /** Optional tile color. Neutral gray by default — pair a colored tile with a white glyph. */
   color?: string;
 }
 
@@ -166,7 +166,7 @@ export function ListIcon({ children, color }: ListIconProps) {
         width: 29,
         height: 29,
         borderRadius: 7,
-        backgroundColor: color ?? colors.accent.default,
+        backgroundColor: color ?? colors.fill.tertiary,
         alignItems: 'center',
         justifyContent: 'center',
       }}

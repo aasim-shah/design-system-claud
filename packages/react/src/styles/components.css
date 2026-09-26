@@ -397,7 +397,8 @@
    -------------------------------------------------------------------------- */
 
 .lm-switch {
-  --lm-switch-on: var(--lm-color-success);
+  --lm-switch-on: var(--lm-color-accent);
+  --lm-switch-thumb-on: var(--lm-color-accent-on);
   --lm-switch-w: 51px;
   --lm-switch-h: 31px;
   --lm-switch-pad: 2px;
@@ -415,7 +416,7 @@
   transition: background-color var(--lm-duration-base) var(--lm-ease-standard);
 }
 
-.lm-switch[data-tone='accent'] { --lm-switch-on: var(--lm-color-accent); }
+.lm-switch[data-tone='success'] { --lm-switch-on: var(--lm-color-success); --lm-switch-thumb-on: #fff; }
 .lm-switch[data-size='sm'] { --lm-switch-w: 40px; --lm-switch-h: 24px; }
 
 .lm-switch[aria-checked='true'] { background: var(--lm-switch-on); }
@@ -433,10 +434,12 @@
     0 3px 1px rgba(0, 0, 0, 0.06);
   transition:
     transform var(--lm-duration-slow) var(--lm-ease-emphasized),
+    background-color var(--lm-duration-base) var(--lm-ease-standard),
     width var(--lm-duration-fast) var(--lm-ease-standard);
 }
 
 .lm-switch[aria-checked='true'] .lm-switch__thumb {
+  background: var(--lm-switch-thumb-on);
   transform: translateX(calc(var(--lm-switch-w) - var(--lm-switch-thumb) - var(--lm-switch-pad) * 2));
 }
 
@@ -690,6 +693,10 @@
    Card
    -------------------------------------------------------------------------- */
 
+.lm-card,
+.lm-list-item,
+.lm-btn { text-decoration: none; }
+
 .lm-card {
   --lm-card-padding: var(--lm-space-5);
   --lm-card-radius: var(--lm-radius-xl);
@@ -818,8 +825,8 @@
   width: 29px;
   height: 29px;
   border-radius: 7px;
-  background: var(--lm-list-icon-bg, var(--lm-color-accent));
-  color: #fff;
+  background: var(--lm-list-icon-bg, var(--lm-color-fill-tertiary));
+  color: var(--lm-list-icon-fg, var(--lm-color-label-primary));
 }
 .lm-list-item__icon .lm-icon { --lm-icon-size: 17px; }
 

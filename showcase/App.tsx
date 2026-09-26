@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { palette, semantic, textStyles, spacing, radius, type TextVariant } from '@lumen/tokens';
+import { semantic, textStyles, spacing, radius, type TextVariant } from '@lumen/tokens';
 import {
   Avatar,
   AvatarGroup,
@@ -43,15 +43,6 @@ import {
   ToastProvider,
   type ColorSchemePreference,
 } from '@lumen/react';
-
-const accents = [
-  { name: 'Blue', value: undefined, swatch: palette.light.blue },
-  { name: 'Indigo', value: '#5E5CE6', swatch: '#5E5CE6' },
-  { name: 'Pink', value: '#FF2D55', swatch: '#FF2D55' },
-  { name: 'Orange', value: '#FF9500', swatch: '#FF9500' },
-  { name: 'Green', value: '#34C759', swatch: '#34C759' },
-  { name: 'Graphite', value: '#3A3A3C', swatch: '#3A3A3C' },
-];
 
 /* Small inline glyphs for the demo (any 24px stroke icon set works) */
 const Wifi = () => (
@@ -139,7 +130,7 @@ function Swatch({ name, token, light, dark }: { name: string; token: string; lig
   );
 }
 
-function Header({ accent, setAccent }: { accent?: string; setAccent: (a?: string) => void }) {
+function Header() {
   const { preference, setPreference } = useTheme();
   return (
     <NavigationBar
@@ -148,27 +139,13 @@ function Header({ accent, setAccent }: { accent?: string; setAccent: (a?: string
         <HStack gap={2}>
           <span className="sc-logo" aria-hidden />
           <Text variant="headline">Lumen</Text>
-          <Badge size="sm" tone="neutral">
-            v0.1
-          </Badge>
+          <Text variant="footnote" color="tertiary">
+            v0.2
+          </Text>
         </HStack>
       }
       trailing={
         <HStack gap={3}>
-          <HStack gap={1.5} className="sc-accents" role="radiogroup" aria-label="Accent color">
-            {accents.map((a) => (
-              <button
-                key={a.name}
-                role="radio"
-                aria-checked={accent === a.value}
-                aria-label={a.name}
-                title={a.name}
-                className="sc-accent"
-                style={{ background: a.swatch }}
-                onClick={() => setAccent(a.value)}
-              />
-            ))}
-          </HStack>
           <SegmentedControl<ColorSchemePreference>
             label="Appearance"
             value={preference}
@@ -189,13 +166,13 @@ function Hero() {
   return (
     <div className="sc-hero">
       <VStack gap={5} align="center">
-        <Badge dot tone="success">
-          Web · Next.js · React Native
-        </Badge>
+        <Text variant="subheadline" color="secondary" weight="medium">
+          For Web, Next.js & React Native
+        </Text>
         <Text variant="display" align="center" balance>
           Quiet by design.
           <br />
-          <span className="sc-grad">Clear by default.</span>
+          <Text as="span" variant="display" color="tertiary">Clear by default.</Text>
         </Text>
         <Text variant="title3" as="p" weight="regular" color="secondary" align="center" balance className="sc-hero__lead">
           Lumen is a calm, minimal design system with one set of tokens and matching components for the web and
@@ -205,7 +182,7 @@ function Hero() {
           <Button size="lg" shape="capsule" href="#components">
             Explore components
           </Button>
-          <Button size="lg" shape="capsule" variant="gray" href="#foundations">
+          <Button size="lg" shape="capsule" variant="plain" href="#foundations">
             Foundations
           </Button>
         </HStack>
@@ -217,13 +194,12 @@ function Hero() {
 function Foundations() {
   const semanticGroups: { title: string; items: [string, string, keyof typeof semantic.light, string?][] }[] = [
     {
-      title: 'Intent',
+      title: 'Accent & status',
       items: [
         ['Accent', '--lm-color-accent', 'accent', 'default'],
         ['Success', '--lm-color-success', 'success', 'default'],
         ['Warning', '--lm-color-warning', 'warning', 'default'],
         ['Danger', '--lm-color-danger', 'danger', 'default'],
-        ['Info', '--lm-color-info', 'info', 'default'],
       ],
     },
     {
@@ -255,15 +231,14 @@ function Foundations() {
     },
   ];
 
-  const hues = ['blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'yellow', 'green', 'mint', 'teal', 'cyan', 'brown'] as const;
   const variants = Object.keys(textStyles) as TextVariant[];
 
   return (
     <Section
       id="foundations"
       eyebrow="Foundations"
-      title="Tokens are the single source of truth."
-      lead="Semantic colors adapt to light and dark automatically. Components never reference a raw hex — so re-theming is a one-line change."
+      title="Ink, paper, and very little else."
+      lead="Lumen is monochrome by default. Color appears only when it means something: success, a warning, or a destructive action. Add a brand color with one line if you need one."
     >
       <VStack gap={10}>
         {semanticGroups.map((g) => (
@@ -281,19 +256,6 @@ function Foundations() {
           </VStack>
         ))}
 
-        <VStack gap={3}>
-          <Text variant="headline">Palette</Text>
-          <div className="sc-palette">
-            {hues.map((h) => (
-              <div key={h} className="sc-palette__item">
-                <div className="sc-palette__chip" style={{ background: `var(--lm-${h})` }} />
-                <Text variant="caption1" color="secondary" align="center">
-                  {h}
-                </Text>
-              </div>
-            ))}
-          </div>
-        </VStack>
 
         <VStack gap={3}>
           <Text variant="headline">Type scale</Text>
@@ -368,13 +330,13 @@ function Buttons() {
       </Demo>
       <Demo label="Tones">
         <HStack gap={3} wrap>
-          <Button tone="neutral">Neutral</Button>
+          <Button tone="neutral" variant="outline">Secondary</Button>
           <Button tone="danger">Delete</Button>
           <Button tone="danger" variant="tinted">
             Remove
           </Button>
-          <Button tone="success" variant="tinted" leadingIcon={<CheckIcon strokeWidth={2.6} />}>
-            Approved
+          <Button variant="gray" leadingIcon={<CheckIcon strokeWidth={2.6} />}>
+            Done
           </Button>
         </HStack>
       </Demo>
@@ -457,7 +419,7 @@ function Controls() {
           <HStack gap={4} wrap>
             <Switch defaultChecked aria-label="Wi-Fi" />
             <Switch aria-label="Bluetooth" />
-            <Switch tone="accent" defaultChecked aria-label="Accent" />
+
             <Switch size="sm" defaultChecked aria-label="Small" />
             <Switch disabled aria-label="Disabled" />
           </HStack>
@@ -545,17 +507,17 @@ function SettingsExample() {
             <ListSection header="Connectivity">
               <List>
                 <ListItem
-                  leading={<ListIcon color="var(--lm-blue)"><Wifi /></ListIcon>}
+                  leading={<ListIcon><Wifi /></ListIcon>}
                   title="Wi-Fi"
                   trailing={<Switch checked={wifi} onCheckedChange={setWifi} aria-label="Wi-Fi" />}
                 />
                 <ListItem
-                  leading={<ListIcon color="var(--lm-red)"><Bell /></ListIcon>}
+                  leading={<ListIcon><Bell /></ListIcon>}
                   title="Notifications"
                   trailing={<Switch checked={notif} onCheckedChange={setNotif} aria-label="Notifications" />}
                 />
                 <ListItem
-                  leading={<ListIcon color="var(--lm-indigo)"><Moon /></ListIcon>}
+                  leading={<ListIcon><Moon /></ListIcon>}
                   title="Dark Appearance"
                   trailing={<Switch checked={dark} onCheckedChange={setDark} aria-label="Dark" />}
                 />
@@ -570,7 +532,7 @@ function SettingsExample() {
             </ListSection>
             <ListSection>
               <List>
-                <ListItem leading={<ListIcon color="var(--lm-gray)"><Lock /></ListIcon>} title="Privacy" detail="On" onClick={() => {}} />
+                <ListItem leading={<ListIcon><Lock /></ListIcon>} title="Privacy" detail="On" onClick={() => {}} />
                 <ListItem title="Storage" detail="48.2 GB of 128 GB" onClick={() => {}} />
                 <ListItem title="Sign Out" destructive onClick={() => {}} />
               </List>
@@ -588,7 +550,7 @@ function Surfaces() {
       <Card>
         <VStack gap={3}>
           <HStack justify="between">
-            <Badge tone="success" dot>
+            <Badge tone="neutral" dot>
               Active
             </Badge>
             <Text variant="footnote" color="secondary">
@@ -611,11 +573,11 @@ function Surfaces() {
         <VStack gap={4}>
           <HStack justify="between">
             <AvatarGroup>
-              <Avatar name="Ada Lovelace" size="sm" color="linear-gradient(180deg,#FF9F0A,#FF6B00)" />
-              <Avatar name="Alan Turing" size="sm" color="linear-gradient(180deg,#64D2FF,#0A84FF)" />
+              <Avatar name="Ada Lovelace" size="sm" />
+              <Avatar name="Alan Turing" size="sm" />
               <Avatar name="Grace Hopper" size="sm" />
             </AvatarGroup>
-            <Badge count={3} variant="solid" tone="danger" />
+            <Badge count={3} variant="solid" />
           </HStack>
           <VStack gap={1}>
             <Text variant="headline">Design review</Text>
@@ -639,7 +601,7 @@ function Surfaces() {
           <HStack gap={4}>
             <Spinner size="sm" />
             <Spinner />
-            <Spinner size="lg" color="var(--lm-color-accent)" />
+            <Spinner size="lg" />
             <Progress style={{ flex: 1 }} label="Loading" />
           </HStack>
         </VStack>
@@ -661,15 +623,14 @@ function Feedback() {
           <Badge tone="success">Success</Badge>
           <Badge tone="warning">Warning</Badge>
           <Badge tone="danger">Danger</Badge>
-          <Badge tone="info">Info</Badge>
           <Badge tone="neutral">Neutral</Badge>
           <Badge variant="solid">New</Badge>
-          <Badge variant="solid" tone="danger" count={128} />
+          <Badge variant="solid" count={128} />
           <Divider orientation="vertical" style={{ height: 24 }} />
           <Avatar name="Tim Cook" size="xs" />
           <Avatar name="Jony Ive" size="sm" status />
-          <Avatar name="Aasim Shah" size="md" color="linear-gradient(180deg,#5E5CE6,#AF52DE)" />
-          <Avatar name="Lumen" size="lg" shape="rounded" color="linear-gradient(135deg,#0A84FF,#64D2FF)" />
+          <Avatar name="Aasim Shah" size="md" />
+          <Avatar name="Lumen" size="lg" shape="rounded" />
         </HStack>
       </Demo>
       <Demo label="Toasts, dialogs & sheets">
@@ -695,13 +656,13 @@ function Feedback() {
           <Button variant="gray" onClick={() => toast.error('Couldn’t connect', { description: 'Check your network and try again.' })}>
             Error toast
           </Button>
-          <Button variant="tinted" onClick={() => setDialog(true)}>
+          <Button variant="gray" onClick={() => setDialog(true)}>
             Dialog
           </Button>
-          <Button variant="tinted" tone="danger" onClick={() => setAlert(true)}>
+          <Button variant="gray" onClick={() => setAlert(true)}>
             Alert
           </Button>
-          <Button variant="tinted" onClick={() => setSheet(true)}>
+          <Button variant="gray" onClick={() => setSheet(true)}>
             Sheet
           </Button>
         </HStack>
@@ -829,11 +790,10 @@ function Components() {
 }
 
 export function App() {
-  const [accent, setAccent] = useState<string | undefined>(undefined);
   return (
-    <ThemeProvider accent={accent} storageKey="lumen-showcase-scheme">
+    <ThemeProvider storageKey="lumen-showcase-scheme">
       <ToastProvider>
-        <Header accent={accent} setAccent={setAccent} />
+        <Header />
         <main className="sc-main">
           <Hero />
           <Foundations />

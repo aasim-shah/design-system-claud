@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body>
         {/* Both providers are optional. Without them Lumen simply follows the OS theme. */}
-        <ThemeProvider accent="#5E5CE6">
+        <ThemeProvider>
           <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
       </body>

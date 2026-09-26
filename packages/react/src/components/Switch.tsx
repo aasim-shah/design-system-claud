@@ -8,15 +8,15 @@ export interface SwitchProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement
   checked?: boolean;
   defaultChecked?: boolean;
   onCheckedChange?: (checked: boolean) => void;
-  /** `success` (green, iOS default) or your brand `accent`. @default 'success' */
-  tone?: 'success' | 'accent';
+  /** Monochrome `accent` (default) or iOS-style green `success`. @default 'accent' */
+  tone?: 'accent' | 'success';
   size?: 'sm' | 'md';
   /** Name + value for native form submission. */
   name?: string;
 }
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch(
-  { checked, defaultChecked = false, onCheckedChange, tone = 'success', size = 'md', className, onClick, name, ...rest },
+  { checked, defaultChecked = false, onCheckedChange, tone = 'accent', size = 'md', className, onClick, name, ...rest },
   ref,
 ) {
   const [on, setOn] = useControllable(checked, defaultChecked, onCheckedChange);
@@ -28,7 +28,7 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(function Switch
         role="switch"
         aria-checked={on}
         className={cx('lm-switch', className)}
-        data-tone={tone === 'success' ? undefined : tone}
+        data-tone={tone === 'accent' ? undefined : tone}
         data-size={size === 'md' ? undefined : size}
         onClick={(e) => {
           onClick?.(e);

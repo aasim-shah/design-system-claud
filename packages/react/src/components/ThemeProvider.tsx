@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from 'react';
@@ -72,10 +73,18 @@ export function ThemeProvider({
 
   const scheme = preference === 'system' ? system : preference;
 
+  // Only touch data-theme once the user makes an explicit choice, and only
+  // remove it again if we were the ones who set it.
+  const ownsAttr = useRef(false);
   useEffect(() => {
     const root = document.documentElement;
-    if (preference === 'system') root.removeAttribute('data-theme');
-    else root.setAttribute('data-theme', preference);
+    if (preference === 'system') {
+      if (ownsAttr.current) root.removeAttribute('data-theme');
+      ownsAttr.current = false;
+    } else {
+      root.setAttribute('data-theme', preference);
+      ownsAttr.current = true;
+    }
   }, [preference]);
 
   const css = useMemo(

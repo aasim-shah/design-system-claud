@@ -7,8 +7,8 @@ export interface SwitchProps {
   value?: boolean;
   defaultValue?: boolean;
   onValueChange?: (value: boolean) => void;
-  /** `success` (green) or `accent`. @default 'success' */
-  tone?: 'success' | 'accent';
+  /** Monochrome `accent` (default) or iOS-style green `success`. @default 'accent' */
+  tone?: 'accent' | 'success';
   size?: 'sm' | 'md';
   disabled?: boolean;
   accessibilityLabel?: string;
@@ -20,7 +20,7 @@ export function Switch({
   value,
   defaultValue = false,
   onValueChange,
-  tone = 'success',
+  tone = 'accent',
   size = 'md',
   disabled,
   accessibilityLabel,
@@ -88,7 +88,10 @@ export function Switch({
             width,
             height: thumb,
             borderRadius: thumb / 2,
-            backgroundColor: '#FFFFFF',
+            backgroundColor:
+              tone === 'accent'
+                ? progress.interpolate({ inputRange: [0, 1], outputRange: ['#FFFFFF', colors.accent.on] })
+                : '#FFFFFF',
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 3 },
             shadowOpacity: 0.15,

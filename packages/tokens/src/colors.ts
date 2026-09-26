@@ -162,10 +162,11 @@ const light: SemanticColors = {
     regular: 'rgba(249, 249, 249, 0.78)',
     thick: 'rgba(255, 255, 255, 0.92)',
   },
+  // Monochrome by default: the accent is ink. Pass `accent` to ThemeProvider for a brand color.
   accent: {
-    default: palette.light.blue,
-    pressed: '#0062CC',
-    subtle: 'rgba(0, 122, 255, 0.12)',
+    default: '#111111',
+    pressed: '#3A3A3C',
+    subtle: 'rgba(0, 0, 0, 0.05)',
     on: '#FFFFFF',
   },
   success: {
@@ -187,13 +188,13 @@ const light: SemanticColors = {
     on: '#FFFFFF',
   },
   info: {
-    default: palette.light.indigo,
-    pressed: '#3634A3',
-    subtle: 'rgba(88, 86, 214, 0.12)',
+    default: '#636366',
+    pressed: '#48484A',
+    subtle: 'rgba(118, 118, 128, 0.12)',
     on: '#FFFFFF',
   },
   scrim: 'rgba(0, 0, 0, 0.32)',
-  focus: 'rgba(0, 122, 255, 0.45)',
+  focus: 'rgba(0, 0, 0, 0.22)',
   inverse: '#1C1C1E',
   thumb: '#FFFFFF',
 };
@@ -231,10 +232,10 @@ const dark: SemanticColors = {
     thick: 'rgba(22, 22, 22, 0.92)',
   },
   accent: {
-    default: palette.dark.blue,
-    pressed: '#409CFF',
-    subtle: 'rgba(10, 132, 255, 0.2)',
-    on: '#FFFFFF',
+    default: '#F5F5F7',
+    pressed: '#C7C7CC',
+    subtle: 'rgba(255, 255, 255, 0.1)',
+    on: '#000000',
   },
   success: {
     default: palette.dark.green,
@@ -255,13 +256,13 @@ const dark: SemanticColors = {
     on: '#FFFFFF',
   },
   info: {
-    default: palette.dark.indigo,
-    pressed: '#7D7AFF',
-    subtle: 'rgba(94, 92, 230, 0.24)',
-    on: '#FFFFFF',
+    default: '#AEAEB2',
+    pressed: '#C7C7CC',
+    subtle: 'rgba(118, 118, 128, 0.24)',
+    on: '#000000',
   },
   scrim: 'rgba(0, 0, 0, 0.56)',
-  focus: 'rgba(10, 132, 255, 0.6)',
+  focus: 'rgba(255, 255, 255, 0.32)',
   inverse: '#F2F2F7',
   thumb: '#636366',
 };

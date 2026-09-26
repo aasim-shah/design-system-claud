@@ -68,8 +68,8 @@ function Home() {
           <List>
             <ListItem
               leading={
-                <ListIcon color={theme.palette.blue}>
-                  <Glyph name="search" size={16} color="#fff" />
+                <ListIcon>
+                  <Glyph name="search" size={16} color={theme.colors.label.primary} />
                 </ListIcon>
               }
               title="Wi-Fi"

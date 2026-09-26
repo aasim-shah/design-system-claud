@@ -14,7 +14,9 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-:where(body) {
+/* Plain type selector (not :where) so the canvas color reliably wins over
+   host/reset styles; any class or id selector of yours still overrides it. */
+body {
   margin: 0;
   font-family: var(--lm-font-sans);
   font-size: var(--lm-text-body-size);
@@ -45,12 +47,15 @@
 
 :where(a) {
   color: var(--lm-color-accent);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: var(--lm-color-separator);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--lm-duration-fast) var(--lm-ease-standard);
 }
 
 :where(a:hover) {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration-color: currentColor;
 }
 
 ::selection {

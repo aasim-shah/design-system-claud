@@ -109,14 +109,14 @@ export const ListItem = forwardRef<HTMLElement, ListItemProps>(function ListItem
 
 export interface ListIconProps {
   children: ReactNode;
-  /** Tile color — any CSS color or `var(--lm-orange)` etc. */
+  /** Optional tile color (glyph turns white). Neutral gray by default. */
   color?: string;
 }
 
 /** The small rounded, colored icon tile used at the start of list rows. */
 export function ListIcon({ children, color }: ListIconProps) {
   return (
-    <span className="lm-list-item__icon" style={color ? ({ '--lm-list-icon-bg': color } as CSSProperties) : undefined}>
+    <span className="lm-list-item__icon" style={color ? ({ '--lm-list-icon-bg': color, '--lm-list-icon-fg': '#fff' } as CSSProperties) : undefined}>
       {children}
     </span>
   );

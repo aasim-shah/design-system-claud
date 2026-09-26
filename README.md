@@ -18,12 +18,13 @@ examples/           Copy-paste starters for Next.js and Expo
 
 ## Principles
 
-1. **Content first.** Surfaces recede, content leads. Hairlines instead of borders, soft shadows instead of outlines.
-2. **One primary action per view.** Button weight goes `filled → tinted → gray → outline → plain`. Use one `filled` per screen.
-3. **Semantic, never raw.** Components use roles (`label.secondary`, `background.grouped`), never hex values, so light/dark and re-branding come free.
-4. **Comfortable to touch.** Every control is at least 44pt. Spacing sits on a 4pt grid.
-5. **Motion explains, never decorates.** Short, physical springs; everything respects *reduce motion*.
-6. **Accessible by default.** Real `<button>`, `<dialog>`, `role="switch"`, labelled fields, visible focus rings, WCAG-checked contrast.
+1. **Monochrome first.** Ink on paper. The accent is black (white in dark mode), and color appears only when it carries meaning: success, warning, or a destructive action.
+2. **Content first.** Surfaces recede, content leads. Hairlines instead of borders, soft shadows instead of outlines.
+3. **One primary action per view.** Button weight goes `filled → tinted → gray → outline → plain`. Use one `filled` per screen.
+4. **Semantic, never raw.** Components use roles (`label.secondary`, `background.grouped`), never hex values, so light/dark and re-branding come free.
+5. **Comfortable to touch.** Every control is at least 44pt. Spacing sits on a 4pt grid.
+6. **Motion explains, never decorates.** Short, physical springs; everything respects *reduce motion*.
+7. **Accessible by default.** Real `<button>`, `<dialog>`, `role="switch"`, labelled fields, visible focus rings, WCAG-checked contrast.
 
 ---
 
@@ -48,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" suppressHydrationWarning>
       <head><ThemeScript /></head>
       <body>
-        <ThemeProvider accent="#5E5CE6">
+        <ThemeProvider>
           <ToastProvider>{children}</ToastProvider>
         </ThemeProvider>
       </body>
@@ -110,10 +111,12 @@ Full examples: [`examples/nextjs`](examples/nextjs) · [`examples/expo`](example
 | --- | --- |
 | Automatic via `prefers-color-scheme`. Force it with `data-theme="dark" \| "light"` or a `.dark` / `.light` class on any ancestor (works with `next-themes`). `useTheme().setPreference('dark' \| 'light' \| 'system')` persists the choice. | Automatic via `useColorScheme()`. `useTheme().setPreference(...)`, or control it with `<ThemeProvider scheme={...}>`. |
 
-### Brand accent in one line
+### Brand accent in one line (optional)
+
+Out of the box the accent is monochrome. If a product needs a brand color, opt in:
 
 ```tsx
-<ThemeProvider accent="#FF2D55">                       // same hex for both schemes
+<ThemeProvider accent="#007AFF">                       // e.g. iOS blue, same hex for both schemes
 <ThemeProvider accent={{ light: '#0066CC', dark: '#2997FF' }}>
 ```
 
@@ -162,10 +165,11 @@ export default { presets: [lumen], content: ['./app/**/*.tsx'] };
 | `fill.primary … quaternary` | Translucent fills for tracks, inputs, chips |
 | `separator.default / opaque` | Hairlines |
 | `material.thin / regular / thick` | Translucent bars used with a backdrop blur |
-| `accent · success · warning · danger · info` | Intents. Each has `default`, `pressed`, `subtle`, `on` |
+| `accent` | Primary actions and selection. Black in light mode, white in dark mode, unless you set a brand color |
+| `success · warning · danger · info` | Status only. Each has `default`, `pressed`, `subtle`, `on`. `info` is a neutral gray |
 
-Raw hues (`blue`, `indigo`, `purple`, `pink`, `red`, `orange`, `yellow`, `green`, `mint`, `teal`, `cyan`, `brown`, `gray…gray6`)
-are tuned separately for light and dark, so they carry the same visual weight on white and on black.
+A raw palette (`blue`, `red`, `green`, `gray…gray6`, …) is also available as tokens for rare cases like charts or
+illustrations. No component uses it by default.
 
 ### Type scale
 
@@ -212,12 +216,12 @@ The same component names and props exist on both platforms, where the platform a
 | `TextField` | ✓ | ✓ | `label`, `description`, `error`, `leading`/`trailing`, `clearable` |
 | `SearchField` | ✓ | ✓ | Magnifier and clear button |
 | `TextArea` · `Select` | ✓ | – | Select wraps the native `<select>`, the best picker on every platform |
-| `Switch` | ✓ | ✓ | 51×31 with a thumb that stretches while pressed. Identical on iOS and Android |
+| `Switch` | ✓ | ✓ | 51×31 with a thumb that stretches while pressed. Monochrome by default; `tone="success"` gives iOS green |
 | `Checkbox` · `Radio` / `RadioGroup` | ✓ | ✓ | Square or circle, indeterminate (web), animated check |
 | `SegmentedControl` | ✓ | ✓ | Sliding thumb and arrow-key navigation (web) |
 | `Slider` | ✓ | – | Native range input. On RN, use `@react-native-community/slider` with `theme.colors.accent.default` |
 | `Card` | ✓ | ✓ | elevated·filled·grouped·outlined. Becomes interactive with `onClick`/`onPress`/`href` |
-| `List` · `ListSection` · `ListItem` · `ListIcon` | ✓ | ✓ | Inset grouped rows with icon tiles, detail, chevron, checkmark, destructive, inset hairlines |
+| `List` · `ListSection` · `ListItem` · `ListIcon` | ✓ | ✓ | Inset grouped rows with neutral icon tiles, detail, chevron, checkmark, destructive, inset hairlines |
 | `Badge` | ✓ | ✓ | Tones, subtle/solid, dot, count (`99+`) |
 | `Avatar` · `AvatarGroup` | ✓ | ✓ / – | Image with an initials fallback and a status dot |
 | `Divider` | ✓ | ✓ | True hairline |
